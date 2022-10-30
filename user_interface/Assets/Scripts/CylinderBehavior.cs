@@ -10,8 +10,8 @@ public class CylinderBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print(gameObject.name);
-        originalScale = gameObject.transform.localScale;
+        Debug.Log(gameObject.name);
+        originalScale = new Vector3(0.11f, 0.002f, 0.11f); //gameObject.transform.localScale; // TODO: solve bug of scale going to 0 on runtime
     }
 
     // Update is called once per frame
