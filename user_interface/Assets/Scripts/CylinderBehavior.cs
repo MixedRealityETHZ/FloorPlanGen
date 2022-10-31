@@ -12,6 +12,7 @@ public class CylinderBehavior : MonoBehaviour
     {
         Debug.Log(gameObject.name);
         originalScale = new Vector3(0.11f, 0.002f, 0.11f); //gameObject.transform.localScale; // TODO: solve bug of scale going to 0 on runtime
+        gameObject.transform.localScale = originalScale;
     }
 
     // Update is called once per frame
