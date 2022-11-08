@@ -40,6 +40,7 @@ public class SphereBehavior : MonoBehaviour
 
     public void onManipulationRelease(ManipulationEventData eventData)
     {
+        float dist = 0.0;
         var releasePosition = gameObject.transform.position;
 
         gameObject.transform.position = originalPosition; // move sphere back to where it was
@@ -50,8 +51,8 @@ public class SphereBehavior : MonoBehaviour
         {
             var go = furniture.gameObject;
             Vector3 point1 = go.transform.position;
-            float dist = (float)Math.Sqrt(Math.Pow(point1[0] - releasePosition[0], 2) + Math.Pow(point1[1] - releasePosition[1], 2)
-                + Math.Pow(point1[2] - releasePosition[2], 2));
+            // dist = (float)Math.Sqrt(Math.Pow(point1[0] - releasePosition[0], 2) + Math.Pow(point1[1] - releasePosition[1], 2)
+            //    + Math.Pow(point1[2] - releasePosition[2], 2));
 
             dist = (float)Math.Sqrt(Math.Pow(point1[0] - releasePosition[0], 2) + Math.Pow(point1[1] - releasePosition[1], 2));
             if (dist < 0.2f)
