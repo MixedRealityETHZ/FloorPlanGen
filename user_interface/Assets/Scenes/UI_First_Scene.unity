@@ -794,7 +794,7 @@ GameObject:
   - component: {fileID: 827923773}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: LinkSphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -826,6 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionLine: {fileID: 689537209}
+  finalLinkMaterial: {fileID: 2100000, guid: 3c55769e893c4f4c8c51b7fa69bee2b9, type: 2}
 --- !u!114 &827923774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,7 +1394,7 @@ GameObject:
   - component: {fileID: 1395860859}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: LinkSphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1582,6 +1583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionLine: {fileID: 1855761240}
+  finalLinkMaterial: {fileID: 2100000, guid: 3c55769e893c4f4c8c51b7fa69bee2b9, type: 2}
 --- !u!1 &1495485946
 GameObject:
   m_ObjectHideFlags: 0
