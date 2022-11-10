@@ -10,16 +10,20 @@ public class SphereBehavior : MonoBehaviour
     public GameObject connectionLine;
     private LineRenderer lr;
     private bool hasMoved = false;
-    private List<LineRenderer> allLineRenderers = new List<LineRenderer>();
     private Vector3[] positions;
+    private LinksModel linksModel;
 
     public Material finalLinkMaterial;
+    public GameObject linkInformation;
+    public float nearDistance;
+    public float finalLinkWidth;
 
 
     // Start is called before the first frame update
     void Start()
     {
         lr = connectionLine.GetComponent<LineRenderer>();
+        linksModel = linkInformation.GetComponent<LinksModel>();
     }
 
     // Update is called once per frame
@@ -51,16 +55,17 @@ public class SphereBehavior : MonoBehaviour
         {
             var go = furniture.gameObject;
             Vector3 endPosition = go.transform.position;
-            // dist = (float)Math.Sqrt(Math.Pow(point1[0] - releasePosition[0], 2) + Math.Pow(point1[1] - releasePosition[1], 2)
-            //    + Math.Pow(point1[2] - releasePosition[2], 2));
 
-            dist = (float)Math.Sqrt(Math.Pow(endPosition[0] - releasePosition[0], 2) + Math.Pow(endPosition[1] - releasePosition[1], 2));
-            if (dist < 0.2f)
+            dist = Vector3.Distance(endPosition, releasePosition); //(float)Math.Sqrt(Math.Pow(endPosition[0] - releasePosition[0], 2) + Math.Pow(endPosition[1] - releasePosition[1], 2));
+            if (dist < nearDistance)
             {
-                Debug.Log($"Furniture found at {endPosition}");
+                // Debug.Log($"Furniture origin: {originalPosition}");
+                // Debug.Log($"Furniture found: {endPosition}");
+
                 // check for existing lines
                 bool createLine = true;
-                foreach (var line in allLineRenderers)
+                List<LineRenderer> allLines = linksModel.getLines();
+                foreach (var line in allLines)
                 {
                     positions = new Vector3[2];
                     line.GetPositions(positions);
@@ -68,9 +73,10 @@ public class SphereBehavior : MonoBehaviour
                     {
                         continue;
                     }
-                    if ((positions[0] == originalPosition && positions[1] == endPosition) || (positions[1] == originalPosition && positions[1] == endPosition))
+                    if ((positions[0] == originalPosition && positions[1] == endPosition) || (positions[1] == originalPosition && positions[0] == endPosition))
                     {
-                        line.positionCount = 0;
+                        // Debug.Log("Deleting line");
+                        linksModel.removeLine(line);
                         createLine = false;
                         break;
                     }
@@ -88,7 +94,7 @@ public class SphereBehavior : MonoBehaviour
                     //For drawing line in the world space, provide the x,y,z values
                     lineRenderer.SetPosition(0, originalPosition); //x,y and z position of the starting point of the line
                     lineRenderer.SetPosition(1, endPosition); //x,y and z position of the end point of the line
-                    allLineRenderers.Add(lineRenderer);
+                    linksModel.addLine(lineRenderer);
                 }
             }
 
