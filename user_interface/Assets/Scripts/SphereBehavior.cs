@@ -10,6 +10,8 @@ public class SphereBehavior : MonoBehaviour
     private Node node;
     private LineRenderer lr; // Transparent line that shows during Sphere manipulation 
 
+    private bool activeLink = false;
+
     public float nearDistance;
 
 
@@ -28,12 +30,18 @@ public class SphereBehavior : MonoBehaviour
         lr.SetPosition(1, gameObject.transform.position);
     }
 
+    public void onManipulationStart(ManipulationEventData eventData)
+    {
+        lr.gameObject.SetActive(true);
+    }
+
     public void onManipulationRelease(ManipulationEventData eventData)
     {
         float dist = 0.0f;
         var releasePosition = gameObject.transform.position;
 
         gameObject.transform.position = node.getSphereBasePosition(); // move sphere back to where it was
+        lr.gameObject.SetActive(false);
 
         var furnitures = GameObject.FindGameObjectsWithTag("LinkSphere");
         foreach (var furniture in furnitures)
