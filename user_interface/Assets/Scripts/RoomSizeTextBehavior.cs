@@ -16,16 +16,10 @@ public class RoomSizeTextBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        float size = gameObject.transform.parent.gameObject.GetComponent<Node>().getObjectSize();
 
-    public void OnSliderUpdate(SliderEventData eventData)
-    {
         TextMeshPro mText = GetComponent<TextMeshPro>();
-        var sliderValue = eventData.NewValue;
-        var realSize = sliderValue * 40;
-        var text = realSize.ToString("0.0")+ "m²";
+        var text = size.ToString("0.0") + "m²";
         mText.SetText(text);
-        //gameObject.transform.localScale = new Vector3(originalScale[0] * 2 * sliderValue, originalScale[1], originalScale[2] * 2 * sliderValue);
     }
 }
