@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 
-
 public class Node : MonoBehaviour // attached to FurnitureUI
 {
     public int id; // user-specified (TODO: auto-generate?)
@@ -47,6 +46,21 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     // Getters
 
+
+
+    public NodeExport getNode()
+    {
+        NodeExport node = new NodeExport();
+        node.ID = id;
+        node.objectname = objectName;
+        node.location = location;
+        node.rotation = rotation;
+        node.size = size;
+
+        string json = JsonUtility.ToJson(node);
+        return node;
+    }
+
     public float getObjectSize()
     {
         return size;
@@ -58,4 +72,14 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         spherePosition[1] += sphereBaseYOffset;
         return spherePosition;
     }
+}
+
+[System.Serializable]
+public struct NodeExport
+{
+    public int ID;
+    public string objectname;
+    public Vector2 location;
+    public float rotation;
+    public float size;
 }

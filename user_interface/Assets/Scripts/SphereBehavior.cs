@@ -18,7 +18,7 @@ public class SphereBehavior : MonoBehaviour
     {
         lr = gameObject.transform.GetChild(0).gameObject.GetComponent<LineRenderer>();
         node = gameObject.transform.parent.gameObject.GetComponent<Node>();
-        model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>(); ;
+        model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>();
     }
 
     // Update is called once per frame

@@ -73,5 +73,47 @@ public class Model : MonoBehaviour
 
             listOfLinks.Add(newLink);
         }
+
+        // TODO: remove (this is for visualization)
+        exportGraphToJson();
+    }
+
+    // Export graph to JSON
+
+    [System.Serializable]
+    struct GraphExport
+    {
+        public List<NodeExport> Nodes;
+        public List<EdgeExport> Edges;
+    }
+
+    [System.Serializable]
+    struct EdgeExport
+    {
+        public int nodeA;
+        public int nodeB;
+    }
+
+    public string exportGraphToJson()
+    {
+        var graph = new GraphExport();
+
+        graph.Nodes = new List<NodeExport>();
+        foreach (var node in listOfNodes)
+        {
+            graph.Nodes.Add(node.getNode());
+        }
+
+        graph.Edges = new List<EdgeExport>();
+        foreach (var link in listOfLinks)
+        {
+            var edge = new EdgeExport();
+            edge.nodeA = link.node1.id;
+            edge.nodeB = link.node2.id;
+            graph.Edges.Add(edge);
+        }
+            
+        string json = JsonUtility.ToJson(graph);
+        return json;
     }
 }
