@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v5.6.0-24-g3608ad5">
+        <ModelTarget name="dinningTableDetails" targetId="7e20775499f3466183197a6a3bcecc68" version="13.0" toolVersion="v5.6.0-24-g3608ad5" bbox="-0.091867 -0.000081 -0.103878 0.074339 0.080467 0.020635" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="dinningTableDetails" assemblyId="bc88a161a0714ff89764f14bfd6fe1c5">
+        <Part name="dinningTableDetails" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>
