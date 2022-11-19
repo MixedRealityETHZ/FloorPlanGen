@@ -75,7 +75,7 @@ public class Model : MonoBehaviour
         }
 
         // TODO: remove (this is for visualization)
-        exportGraphToJson();
+        //exportGraphToJson();
     }
 
     // Export graph to JSON
