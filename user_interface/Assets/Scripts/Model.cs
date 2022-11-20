@@ -38,8 +38,8 @@ public class Model : MonoBehaviour
         // Create links from the list
         foreach (var link in listOfLinks)
         {
-            link.lineRenderer.SetPosition(0, link.node1.getSphereBasePosition()); //x,y and z position of the starting point of the line
-            link.lineRenderer.SetPosition(1, link.node2.getSphereBasePosition()); //x,y and z position of the end point of the line
+            link.lineRenderer.SetPosition(0, link.node1.getSphereBaseCoordinates()); //x,y and z position of the starting point of the line
+            link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
         }
     }
 

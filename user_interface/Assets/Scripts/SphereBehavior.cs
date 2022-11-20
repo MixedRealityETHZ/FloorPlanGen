@@ -10,8 +10,6 @@ public class SphereBehavior : MonoBehaviour
     private Node node;
     private LineRenderer lr; // Transparent line that shows during Sphere manipulation 
 
-    private bool activeLink = false;
-
     public float nearDistance;
 
 
@@ -26,7 +24,7 @@ public class SphereBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lr.SetPosition(0, node.getSphereBasePosition());
+        lr.SetPosition(0, node.getSphereBaseCoordinates());
         lr.SetPosition(1, gameObject.transform.position);
     }
 
@@ -39,8 +37,8 @@ public class SphereBehavior : MonoBehaviour
     {
         float dist = 0.0f;
         var releasePosition = gameObject.transform.position;
+        gameObject.transform.position = node.getSphereBaseCoordinates(); // move sphere back to where it was
 
-        gameObject.transform.position = node.getSphereBasePosition(); // move sphere back to where it was
         lr.gameObject.SetActive(false);
 
         var furnitures = GameObject.FindGameObjectsWithTag("LinkSphere");

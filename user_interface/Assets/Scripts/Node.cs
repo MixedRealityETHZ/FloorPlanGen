@@ -12,7 +12,6 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     private float size;
 
     private float maxSize = 40;
-    private float sphereBaseYOffset = 0.13f; // Y offset between sphere and slider position (should be coherent with Unity value)
     private Vector3 referencePosition;
 
     // Start is called before the first frame update
@@ -24,7 +23,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     // Update is called once per frame
     void Update()
     {
-        GameObject referenceObj = gameObject.transform.GetChild(1).gameObject; // Slider is the reference object for position and rotation
+        GameObject referenceObj = gameObject.transform.GetChild(3).gameObject; // SphereBase is the reference object for position and rotation
 
         // Position
         referencePosition = referenceObj.transform.position;
@@ -32,7 +31,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         location[1] = referencePosition[2];
         
         // Rotation
-        rotation = referenceObj.transform.rotation[1]; // TODO: change to get rotation relative to boundary curve plane
+        rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
 
         // Debug.Log(this);
     }
@@ -66,11 +65,9 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         return size;
     }
 
-    public Vector3 getSphereBasePosition()
+    public Vector3 getSphereBaseCoordinates()
     {
-        Vector3 spherePosition = referencePosition;
-        spherePosition[1] += sphereBaseYOffset;
-        return spherePosition;
+        return referencePosition;
     }
 }
 
