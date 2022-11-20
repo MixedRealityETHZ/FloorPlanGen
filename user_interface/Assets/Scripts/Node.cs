@@ -69,6 +69,11 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     {
         return referencePosition;
     }
+
+    public string getObjectName()
+    {
+        return objectName;
+    }
 }
 
 [System.Serializable]
