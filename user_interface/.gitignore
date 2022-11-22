@@ -3,3 +3,9 @@ Library/
 Logs/
 UserSettings/
 Temp/
+Packages/
+QCAR/
+.vsconfig
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp.csproj
+user_interface.sln
