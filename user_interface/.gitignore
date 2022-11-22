@@ -1,7 +1,13 @@
 Builds/
+Build/
 Library/
 Logs/
 UserSettings/
 Temp/
-Packages/com.ptc.vuforia.engine-10.11.3.tgz
-Build/
+Assets/Resources/VuforiaModels/Vuforia*
+Assets/SampleResources/
+Assets/StreamingAssets/Vuforia/Vuforia*
+Assets/Editor/Vuforia/Cylinder*
+Assets/Editor/Vuforia/ImageTarget*
+Assets/Editor/Vuforia/Vuforia*
+Packages/
