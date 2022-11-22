@@ -10,4 +10,4 @@
 * Run on playmode the scene UI-ModelTarget
 * Stop running it
 * The scene should no longer be black from the editor
-* Change build settings, to WUP, Hololens and ARM64
+* Change build settings, to UWP, Hololens and ARM64
