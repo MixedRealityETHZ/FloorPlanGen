@@ -8,24 +8,15 @@ public class NameTextBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string objectName = gameObject.transform.parent.gameObject.GetComponent<Node>().getObjectName();
+        string objectName = gameObject.transform.parent.gameObject.GetComponent<Node>().getObjectDisplayName();
 
         TextMeshPro mText = GetComponent<TextMeshPro>();
-        mText.SetText(UppercaseFirst(objectName));
+        mText.SetText(objectName);
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    string UppercaseFirst(string s)
-    {
-        if (string.IsNullOrEmpty(s))
-        {
-            return string.Empty;
-        }
-        return char.ToUpper(s[0]) + s.Substring(1);
     }
 }

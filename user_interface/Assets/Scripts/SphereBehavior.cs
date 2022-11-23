@@ -51,7 +51,10 @@ public class SphereBehavior : MonoBehaviour
             if (dist < nearDistance)
             {
                 Node furnitureNode = furniture.transform.parent.gameObject.GetComponent<Node>();
-                model.updateLink(node, furnitureNode);
+                if (node.id != furnitureNode.id)
+                {
+                    model.updateLink(node, furnitureNode);
+                }
             }
         }
     }

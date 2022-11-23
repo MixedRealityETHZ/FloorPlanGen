@@ -7,6 +7,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 {
     public int id; // user-specified (TODO: auto-generate?)
     public string objectName; // user-specified
+    public string displayName; // user-specified
     private Vector2 location;
     private float rotation;
     private float size;
@@ -70,9 +71,9 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         return referencePosition;
     }
 
-    public string getObjectName()
+    public string getObjectDisplayName()
     {
-        return objectName;
+        return displayName;
     }
 }
 
