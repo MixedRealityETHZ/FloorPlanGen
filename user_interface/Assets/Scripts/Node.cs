@@ -5,9 +5,11 @@ using Microsoft.MixedReality.Toolkit.UI;
 
 public class Node : MonoBehaviour // attached to FurnitureUI
 {
-    public int id; // user-specified (TODO: auto-generate?)
+    public int id; // user-specified
     public string objectName; // user-specified
     public string displayName; // user-specified
+    public bool isTracked = false; // only for testing (TODO: remove)
+
     private Vector2 location;
     private float rotation;
     private float size;
@@ -34,7 +36,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         // Rotation
         rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
 
-        // Debug.Log(this);
+        updateTrackingStatus(isTracked); // only for testing (TODO: remove)
     }
 
     public void updateObjectSize(SliderEventData eventData)
@@ -74,6 +76,11 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     public string getObjectDisplayName()
     {
         return displayName;
+    }
+
+    public void updateTrackingStatus(bool trackingStatus)
+    {
+        gameObject.transform.GetChild(5).gameObject.SetActive(trackingStatus);
     }
 }
 
