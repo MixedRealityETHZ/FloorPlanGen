@@ -50,7 +50,7 @@ public class TrackingHub : MonoBehaviour
             if (previousStatus != currentTrackingStatus)
             {
                 UnityEngine.Debug.Log("ModelTarget: " + modelTargetID.ToString() + " tracking status is " + currentTrackingStatus.ToString());
-                //ToDo: Prevenir UI
+                UI.GetComponent<Node>().updateTrackingStatus(currentTrackingStatus);
                 previousTrackingStatus[modelTargetID] = currentTrackingStatus;
             }
 

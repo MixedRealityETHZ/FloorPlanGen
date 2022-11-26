@@ -11,6 +11,9 @@ public class Model : MonoBehaviour
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
 
+    // TODO: outline integration
+    // Origin of the outline (to get positions of objects with respect to this origin)
+
     public Material finalLinkMaterial;
     public float finalLinkWidth;
 
