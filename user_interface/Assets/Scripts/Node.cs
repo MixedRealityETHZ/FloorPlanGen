@@ -17,6 +17,9 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     private float maxSize = 40;
     private Vector3 referencePosition;
 
+    // TODO: outline integration
+    // Boolean that says wether the object is inside or outside
+
     // Start is called before the first frame update
     void Start()
     {
