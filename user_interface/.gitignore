@@ -5,7 +5,12 @@ UserSettings/
 Temp/
 Packages/
 QCAR/
+obj/
+.vs/
 .vsconfig
 Assembly-CSharp-Editor.csproj
 Assembly-CSharp.csproj
 user_interface.sln
+CommonEditor.csproj
+CommonScripts.csproj
+VuforiaVersionCheckerScripts.csproj
