@@ -11,12 +11,16 @@ public class SphereBehavior : MonoBehaviour
     private LineRenderer lr; // Transparent line that shows during Sphere manipulation 
 
     public float nearDistance;
+    public Material interactiveLinkMaterial;
 
 
     // Start is called before the first frame update
     void Start()
     {
         lr = gameObject.transform.GetChild(0).gameObject.GetComponent<LineRenderer>();
+        lr.gameObject.SetActive(false); // Hide the line when starting
+        lr.material = interactiveLinkMaterial;
+
         node = gameObject.transform.parent.gameObject.GetComponent<Node>();
         model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>();
     }

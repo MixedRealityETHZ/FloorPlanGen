@@ -8,7 +8,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     public int id; // user-specified
     public string objectName; // user-specified
     public string displayName; // user-specified
-    //public bool isTracked = false; // only for testing (TODO: remove)
+    // public bool isTracked = false; // only for testing (TODO: remove)
 
     private Vector2 location;
     private float rotation;
@@ -23,13 +23,13 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     // Start is called before the first frame update
     void Start()
     {
-
+        updateTrackingStatus(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject referenceObj = gameObject.transform.Find("SphereBase").gameObject; // SphereBase is the reference object for position and rotation
+        GameObject referenceObj = gameObject.transform.Find("TrackingIndicator").gameObject; // TrackingIndicator is the reference object for position and rotation
 
         // Position
         referencePosition = referenceObj.transform.position;
@@ -39,7 +39,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         // Rotation
         rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
 
-        //updateTrackingStatus(isTracked); // only for testing (TODO: remove)
+        // updateTrackingStatus(isTracked); // only for testing (TODO: remove)
     }
 
     public void updateObjectSize(SliderEventData eventData)
@@ -83,7 +83,16 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public void updateTrackingStatus(bool trackingStatus)
     {
-        gameObject.transform.Find("TrackingIndicator").gameObject.SetActive(trackingStatus);
+        GameObject trackingIndicator = gameObject.transform.Find("TrackingIndicator").gameObject;
+        trackingIndicator.GetComponent<CustomProgressIndicatorObjectDisplay>().rotationActive = trackingStatus;
+        Transform target = trackingIndicator.transform.GetChild(0).gameObject.transform.GetChild(0);
+        if (trackingStatus)
+        {
+            target.GetComponent<Renderer>().material.color = new Color(0.16f, 1.0f, 0.0f); // Green
+        } else
+        {
+            target.GetComponent<Renderer>().material.color = new Color(0.0f, 0.576f, 1.0f); // Blue
+        }
     }
 }
 
