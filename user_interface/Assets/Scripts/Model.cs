@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Model : MonoBehaviour
 {
-    // TODO:
-    // Export the graph as JSON.
-    // For better testing, implement independently movable virtual objects/UI.
-
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
 
@@ -76,9 +72,6 @@ public class Model : MonoBehaviour
 
             listOfLinks.Add(newLink);
         }
-
-        // TODO: remove (this is for visualization)
-        //exportGraphToJson();
     }
 
     // Export graph to JSON
@@ -118,5 +111,12 @@ public class Model : MonoBehaviour
             
         string json = JsonUtility.ToJson(graph);
         return json;
+    }
+
+    // Send Mesh request to API
+    public void generateFloorPlan()
+    {
+        Debug.Log(exportGraphToJson());
+        // TODO: implement the request
     }
 }
