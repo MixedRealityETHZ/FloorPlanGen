@@ -116,7 +116,17 @@ public class Model : MonoBehaviour
     // Send Mesh request to API
     public void generateFloorPlan()
     {
+        GameObject button = GameObject.FindGameObjectsWithTag("GenerateButton")[0];
+        StartCoroutine(Wait(4f, button)); // Asynchronous request
+    }
+
+    public IEnumerator Wait(float delayInSecs, GameObject button)
+    {
+        yield return new WaitForSeconds(0.1f); // To keep the button clicking sound
+        button.GetComponent<ButtonLoader>().startLoading();
+        yield return new WaitForSeconds(delayInSecs);  // TODO: implement the request, remove waiting
+
         Debug.Log(exportGraphToJson());
-        // TODO: implement the request
+        button.GetComponent<ButtonLoader>().stopLoading();
     }
 }
