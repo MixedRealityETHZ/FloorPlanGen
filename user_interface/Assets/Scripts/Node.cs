@@ -29,7 +29,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     // Update is called once per frame
     void Update()
     {
-        GameObject referenceObj = gameObject.transform.GetChild(3).gameObject; // SphereBase is the reference object for position and rotation
+        GameObject referenceObj = gameObject.transform.Find("SphereBase").gameObject; // SphereBase is the reference object for position and rotation
 
         // Position
         referencePosition = referenceObj.transform.position;
@@ -83,7 +83,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public void updateTrackingStatus(bool trackingStatus)
     {
-        gameObject.transform.GetChild(5).gameObject.SetActive(trackingStatus);
+        gameObject.transform.Find("TrackingIndicator").gameObject.SetActive(trackingStatus);
     }
 }
 
