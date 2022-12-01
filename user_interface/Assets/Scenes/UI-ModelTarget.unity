@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f65bdeaeb68aa43b1a8805e5fc114b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearDistance: 0.1
+  nearDistance: 0.04
   interactiveLinkMaterial: {fileID: 2100000, guid: 978c13c1492639341a61913375335e64,
     type: 2}
 --- !u!114 &6790202
@@ -1704,7 +1704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f65bdeaeb68aa43b1a8805e5fc114b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearDistance: 0.1
+  nearDistance: 0.04
   interactiveLinkMaterial: {fileID: 2100000, guid: 978c13c1492639341a61913375335e64,
     type: 2}
 --- !u!114 &570606138
