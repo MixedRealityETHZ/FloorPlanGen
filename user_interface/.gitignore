@@ -11,3 +11,9 @@ Assets/Editor/Vuforia/Cylinder*
 Assets/Editor/Vuforia/ImageTarget*
 Assets/Editor/Vuforia/Vuforia*
 Packages/
+
+.vsconfig
+*.csproj
+*.sln
+.vs/
+obj/
