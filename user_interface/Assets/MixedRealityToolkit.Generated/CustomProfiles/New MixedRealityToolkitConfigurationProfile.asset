@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: New MixedRealityToolkitConfigurationProfile
   m_EditorClassIdentifier: 
   isCustomProfile: 1
-  experienceSettingsProfile: {fileID: 11400000, guid: 1ccbb3b1d759d6a49b4161a958329d9d, type: 2}
+  experienceSettingsProfile: {fileID: 11400000, guid: 1ccbb3b1d759d6a49b4161a958329d9d,
+    type: 2}
   targetExperienceScale: 3
   enableCameraSystem: 1
   cameraProfile: {fileID: 11400000, guid: 0447581e7bd59f64fbb28151c65a3dc4, type: 2}
@@ -30,7 +31,8 @@ MonoBehaviour:
       Microsoft.MixedReality.Toolkit.Services.BoundarySystem
   xrsdkBoundarySystemType:
     reference: Microsoft.MixedReality.Toolkit.XRSDK.XRSDKBoundarySystem, Microsoft.MixedReality.Toolkit.Providers.XRSDK
-  boundaryVisualizationProfile: {fileID: 11400000, guid: 6d28cce596b44bd3897ca86f8b24e076, type: 2}
+  boundaryVisualizationProfile: {fileID: 11400000, guid: 6d28cce596b44bd3897ca86f8b24e076,
+    type: 2}
   enableTeleportSystem: 1
   teleportSystemType:
     reference: Microsoft.MixedReality.Toolkit.Teleport.MixedRealityTeleportSystem,
@@ -39,8 +41,10 @@ MonoBehaviour:
   spatialAwarenessSystemType:
     reference: Microsoft.MixedReality.Toolkit.SpatialAwareness.MixedRealitySpatialAwarenessSystem,
       Microsoft.MixedReality.Toolkit.Services.SpatialAwarenessSystem
-  spatialAwarenessSystemProfile: {fileID: 11400000, guid: a41a2c3bdf3ea804285d045eac98b537, type: 2}
-  diagnosticsSystemProfile: {fileID: 11400000, guid: 7ea53b42f37ddb441be985cd27bb2683, type: 2}
+  spatialAwarenessSystemProfile: {fileID: 11400000, guid: a41a2c3bdf3ea804285d045eac98b537,
+    type: 2}
+  diagnosticsSystemProfile: {fileID: 11400000, guid: 7ea53b42f37ddb441be985cd27bb2683,
+    type: 2}
   enableDiagnosticsSystem: 1
   diagnosticsSystemType:
     reference: Microsoft.MixedReality.Toolkit.Diagnostics.MixedRealityDiagnosticsSystem,
@@ -50,7 +54,8 @@ MonoBehaviour:
   sceneSystemType:
     reference: Microsoft.MixedReality.Toolkit.SceneSystem.MixedRealitySceneSystem,
       Microsoft.MixedReality.Toolkit.Services.SceneSystem
-  registeredServiceProvidersProfile: {fileID: 11400000, guid: efbaf6ea540c69f4fb75415a5d145a53, type: 2}
+  registeredServiceProvidersProfile: {fileID: 11400000, guid: efbaf6ea540c69f4fb75415a5d145a53,
+    type: 2}
   useServiceInspectors: 0
   renderDepthBuffer: 0
   enableVerboseLogging: 0
