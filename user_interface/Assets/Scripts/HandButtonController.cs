@@ -14,13 +14,29 @@ public class HandButtonController : MonoBehaviour
     private PressableButtonHoloLens2 toggleButton;
     private PressableButtonHoloLens2[] handButtons;
 
-    bool buttonToggleAlreadyClicked = false;
+    bool toggleInManualTracking = false; //true = automatic mode; manual by default
+
+    TrackingHub trackingHub;
 
     void Start()
     {
         toggleButton = toggleButtonObject.GetComponent<PressableButtonHoloLens2>();
 
         handButtons = handButtonObjects.GetComponentsInChildren<PressableButtonHoloLens2>();
+
+        trackingHub = new TrackingHub();
+        trackingHub.updateManualTracking(toggleInManualTracking); //set automatic by default
+
+
+        //by default, automatic mode so gray out every button
+        for (int i = 0; i < handButtons.Length; i++)
+        {
+            handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.gray;
+            handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.gray;
+            //no need of below I do my own tests and putting enable false throws errors when clicking and not checking instead of just 
+            //no taking care of the click
+            //handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = false;
+        }
 
     }
 
@@ -29,54 +45,71 @@ public class HandButtonController : MonoBehaviour
         
     }
 
+    void clickedOnToggle()
+    {
+        //deactive and gray out or reactive and put white every other button of the furniture
+        for (int i = 0; i < handButtons.Length; i++)
+        {
+            //if we were in manual, go to automatic
+            if (toggleInManualTracking)
+            {
+                handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.gray;
+                handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.gray;
+                //handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = false;
+            }
+
+            //if we were in automatic, go to manual
+            else
+            {
+                handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.white;
+                handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.white;
+                //handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = true;
+            }
+        }
+
+        toggleInManualTracking = !toggleInManualTracking;
+    }
+
+    void clickedOnButton(PressableButtonHoloLens2 buttonClicked)
+    {
+        for (int i = 0; i < handButtons.Length; i++)
+        {
+            if (handButtons[i] != buttonClicked)
+            {
+                handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.gray;
+                handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.gray;
+                //handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = false;
+            }
+        }
+
+
+        buttonClicked.transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.white;
+        buttonClicked.transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.white;
+        //buttonClicked.GetComponent<Interactable>().IsEnabled = true;
+
+        trackingHub.setTarget(buttonClicked.gameObject.GetComponent<ModelTargetID>().id);
+    }
+
     void updateButtons(PressableButtonHoloLens2 buttonClicked)
     {
 
         if (buttonClicked == toggleButton)
         {
-            //deactive and gray out or reactive and put white every other button of the furniture
-            for (int i = 0; i < handButtons.Length; i++)
-            {
-                if (buttonToggleAlreadyClicked)
-                {
-                    handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.white;
-                    handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.white;
-                    handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = true;
-                }
+            clickedOnToggle();
 
-                else
-                {
-                    handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.gray;
-                    handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.gray;
-                    handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = false;
-                }
-            }
-
-            buttonToggleAlreadyClicked = !buttonToggleAlreadyClicked;
+            trackingHub.updateManualTracking(toggleInManualTracking);
         }
 
         else
         {
-            //no need to check that toggle button has been clicked because when it's the case these buttons are disabled so we should 
-            //not be able to click on them and trigger the event
+            //if in manual
+            //in theory no need to check that toggle button has been clicked because when it's the case
+            //these buttons are disabled so we should not be able to click on them and trigger the event
             //ENABLE DOES NOT WORK APPARENTLY SO I NEED TO CHECK
 
-            if (!buttonToggleAlreadyClicked)
+            if (toggleInManualTracking)
             {
-                for (int i = 0; i < handButtons.Length; i++)
-                {
-                    if (handButtons[i] != buttonClicked)
-                    {
-                        handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.gray;
-                        handButtons[i].transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.gray;
-                        handButtonObjects.GetComponentsInChildren<Interactable>()[i].IsEnabled = false;
-                    }
-                }
-
-
-                buttonClicked.transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[0].material.color = Color.white;
-                buttonClicked.transform.Find("IconAndText").GetComponentsInChildren<MeshRenderer>()[1].material.color = Color.white;
-                buttonClicked.GetComponent<Interactable>().IsEnabled = true;
+                clickedOnButton(buttonClicked);
             }
             
         }
@@ -84,8 +117,8 @@ public class HandButtonController : MonoBehaviour
 
 
     public void clickAndChangeOthers(GameObject gameobject)
-    { 
-        Debug.Log("Cliked on" + gameobject.name);
+    {
+        Debug.Log("Cliked on button" + gameobject.name);
         updateButtons(gameobject.GetComponent<PressableButtonHoloLens2>());
     }
 }

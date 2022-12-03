@@ -12,3 +12,16 @@ Assets/Editor/Vuforia/Cylinder*
 Assets/Editor/Vuforia/ImageTarget*
 Assets/Editor/Vuforia/Vuforia*
 Packages/
+./vs
+.vsconfig
+Assembly-CSharp.csproj
+CommonEditor.csproj
+CommonScripts.csproj
+Microsoft.MixedReality.Toolkit.Demos.Audio.csproj
+Microsoft.MixedReality.Toolkit.Demos.Gltf.csproj
+Microsoft.MixedReality.Toolkit.Demos.Gltf.Inspectors.csproj
+Microsoft.MixedReality.Toolkit.Demos.InspectorFields.csproj
+Microsoft.MixedReality.Toolkit.Demos.StandardShader.Inspectors.csproj
+Microsoft.MixedReality.Toolkit.Demos.InspectorFields.Inspectors.csproj
+Microsoft.MixedReality.Toolkit.Examples.csproj
+user_interface.sln
