@@ -10,22 +10,18 @@ public class HandButtonController : MonoBehaviour
 {
     public GameObject toggleButtonObject;
     public GameObject handButtonObjects;
+    public TrackingHub trackingHub;
 
     private PressableButtonHoloLens2 toggleButton;
     private PressableButtonHoloLens2[] handButtons;
 
     bool toggleInManualTracking = false; //true = automatic mode; manual by default
 
-    TrackingHub trackingHub;
-
     void Start()
     {
         toggleButton = toggleButtonObject.GetComponent<PressableButtonHoloLens2>();
 
         handButtons = handButtonObjects.GetComponentsInChildren<PressableButtonHoloLens2>();
-
-        trackingHub = new TrackingHub();
-        trackingHub.updateManualTracking(toggleInManualTracking); //set automatic by default
 
 
         //by default, automatic mode so gray out every button

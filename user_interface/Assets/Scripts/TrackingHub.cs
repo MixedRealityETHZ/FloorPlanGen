@@ -39,9 +39,10 @@ public class TrackingHub : MonoBehaviour
     {
         if (this.manualTracking == manualTracking) return;
 
-        UnityEngine.Debug.Log("ManualMode set to: " + manualTracking);
-
         this.manualTracking = manualTracking;
+
+        UnityEngine.Debug.Log("[TrackingHub] ManualMode set to: " + this.manualTracking);
+
         foreach (KeyValuePair<int, GameObject> item in modelTargets)
         {
             int modelTargetID = item.Key;
@@ -62,7 +63,7 @@ public class TrackingHub : MonoBehaviour
     {
         if (!manualTracking) return;
 
-        UnityEngine.Debug.Log("ManualTarget set to: " + trackingID);
+        UnityEngine.Debug.Log("[TrackingHub] ManualTarget set to: " + trackingID);
 
         trackedTargetID = trackingID;
 
@@ -99,7 +100,7 @@ public class TrackingHub : MonoBehaviour
         bool currentTrackingStatus = (modelTargetBehaviour.TargetStatus.Status == Vuforia.Status.TRACKED);
         if (previousStatus != currentTrackingStatus)
         {
-            UnityEngine.Debug.Log("ModelTarget: " + modelTargetID.ToString() + " tracking status is " + currentTrackingStatus.ToString());
+            UnityEngine.Debug.Log("[TrackingHub] ModelTarget: " + modelTargetID.ToString() + " tracking status is " + currentTrackingStatus.ToString());
             UI.GetComponent<Node>().updateTrackingStatus(currentTrackingStatus);
             previousTrackingStatus[modelTargetID] = currentTrackingStatus;
         }
