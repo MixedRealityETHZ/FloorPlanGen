@@ -12,8 +12,9 @@ Assets/Editor/Vuforia/Cylinder*
 Assets/Editor/Vuforia/ImageTarget*
 Assets/Editor/Vuforia/Vuforia*
 Packages/
-./vs
+.vs/
 .vsconfig
+.obj/
 Assembly-CSharp.csproj
 CommonEditor.csproj
 CommonScripts.csproj
@@ -24,4 +25,6 @@ Microsoft.MixedReality.Toolkit.Demos.InspectorFields.csproj
 Microsoft.MixedReality.Toolkit.Demos.StandardShader.Inspectors.csproj
 Microsoft.MixedReality.Toolkit.Demos.InspectorFields.Inspectors.csproj
 Microsoft.MixedReality.Toolkit.Examples.csproj
+Microsoft.MixedReality.Toolkit.Demos.UX.Interactables.csproj
+VuforiaVersionCheckerScripts.csproj
 user_interface.sln
