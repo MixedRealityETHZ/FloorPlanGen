@@ -4,6 +4,7 @@ Library/
 Logs/
 UserSettings/
 Temp/
+QCAR/
 Assets/Resources/VuforiaModels/Vuforia*
 Assets/SampleResources/
 Assets/StreamingAssets/Vuforia/Vuforia*
