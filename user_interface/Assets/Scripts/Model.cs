@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Model : MonoBehaviour
 {
-    // TODO:
-    // Export the graph as JSON.
-    // For better testing, implement independently movable virtual objects/UI.
-
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
     private GameObject[] outline;
@@ -104,9 +100,6 @@ public class Model : MonoBehaviour
 
             listOfLinks.Add(newLink);
         }
-
-        // TODO: remove (this is for visualization)
-        //exportGraphToJson();
     }
 
     // Export graph to JSON
@@ -147,5 +140,22 @@ public class Model : MonoBehaviour
             
         string json = JsonUtility.ToJson(graph);
         return json;
+    }
+
+    // Send Mesh request to API
+    public void generateFloorPlan()
+    {
+        GameObject button = GameObject.FindGameObjectsWithTag("GenerateButton")[0];
+        StartCoroutine(Wait(4f, button)); // Asynchronous request
+    }
+
+    public IEnumerator Wait(float delayInSecs, GameObject button)
+    {
+        yield return new WaitForSeconds(0.1f); // To keep the button clicking sound
+        button.GetComponent<ButtonLoader>().startLoading();
+        yield return new WaitForSeconds(delayInSecs);  // TODO: implement the request, remove waiting
+
+        Debug.Log(exportGraphToJson());
+        button.GetComponent<ButtonLoader>().stopLoading();
     }
 }

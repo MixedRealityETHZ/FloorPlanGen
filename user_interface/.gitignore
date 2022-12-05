@@ -4,6 +4,7 @@ Library/
 Logs/
 UserSettings/
 Temp/
+QCAR/
 Assets/Resources/VuforiaModels/Vuforia*
 Assets/SampleResources/
 Assets/StreamingAssets/Vuforia/Vuforia*
@@ -11,3 +12,8 @@ Assets/Editor/Vuforia/Cylinder*
 Assets/Editor/Vuforia/ImageTarget*
 Assets/Editor/Vuforia/Vuforia*
 Packages/
+.vs/
+.vsconfig
+obj/
+*.csproj
+*.sln
