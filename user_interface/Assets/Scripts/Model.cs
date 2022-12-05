@@ -10,9 +10,14 @@ public class Model : MonoBehaviour
 
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
+    private GameObject[] outline;
+    private static int outlinePositionCount = 7;
+    private Vector3[] boundaries = new Vector3[outlinePositionCount];
+    private Vector3 outlineScale;
 
     // TODO: outline integration
     // Origin of the outline (to get positions of objects with respect to this origin)
+    private Vector3 origin;
 
     public Material finalLinkMaterial;
     public float finalLinkWidth;
@@ -33,6 +38,10 @@ public class Model : MonoBehaviour
             var node = gameObject.GetComponent<Node>();
             listOfNodes.Add(node);
         }
+        outline = GameObject.FindGameObjectsWithTag("Outline");
+        origin = outline[0].transform.position;
+        outlineScale = outline[0].transform.localScale;
+        outline[0].GetComponent<LineRenderer>().GetPositions(boundaries);
     }
 
     // Update is called once per frame
@@ -44,6 +53,19 @@ public class Model : MonoBehaviour
             link.lineRenderer.SetPosition(0, link.node1.getSphereBaseCoordinates()); //x,y and z position of the starting point of the line
             link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
         }
+        origin = outline[0].transform.position;
+    }
+
+    private bool checkNodeIsInOutline(Node node)
+    {
+        Vector3 loc = node.getSphereBaseCoordinates() - origin;
+        var x = loc[0];
+        var z = loc[2];
+        if (x > boundaries[0][0] & z > boundaries[0][2] & x < boundaries[2][0] * outlineScale[0] & z < boundaries[2][0] * outlineScale[2])
+            return true;
+        if (x > boundaries[0][0] & z > boundaries[2][2] * outlineScale[2] & x < boundaries[4][0] * outlineScale[0] & z < boundaries[4][2] * outlineScale[2])
+            return true;
+        return false;
     }
 
     public void updateLink(Node node1, Node node2)
@@ -60,6 +82,12 @@ public class Model : MonoBehaviour
             }
         }
 
+        // Check if both nodes are within the outline
+        /*if(!checkNodeIsInOutline(node1) | !checkNodeIsInOutline(node2))
+        {
+            addLink = false;
+        }*/
+            
         if (addLink) // if link does not exist, add it
         {
             Link newLink = new Link();
@@ -104,7 +132,8 @@ public class Model : MonoBehaviour
         graph.Nodes = new List<NodeExport>();
         foreach (var node in listOfNodes)
         {
-            graph.Nodes.Add(node.getNode());
+            if(checkNodeIsInOutline(node))
+                graph.Nodes.Add(node.getNode());
         }
 
         graph.Edges = new List<EdgeExport>();
