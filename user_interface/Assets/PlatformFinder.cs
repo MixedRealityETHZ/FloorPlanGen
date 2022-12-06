@@ -5,44 +5,33 @@ using UnityEngine.Events;
 
 public class PlatformFinder : MonoBehaviour
 {
-    [Tooltip("Surface magnetism component being used to control the process")]
-    [SerializeField]
-    private SurfaceMagnetism surfaceMagnet;
-
     [SerializeField]
     [Tooltip("Sound that should be played when the conform prompt is displayed")]
     private AudioSource locationFoundSound;
 
     [SerializeField]
-    [Tooltip("Prompt to encourage the user to look at the floor")]
-    private GameObject lookPrompt;
+    private RadialView radialView;
 
     [SerializeField]
-    [Tooltip("Prompt to ask the user if this is indeed the floor")]
-    private GameObject confirmPrompt;
+    private GameObject objectToPlaceHandler;
 
     [SerializeField]
-    [Tooltip("Triggered once when the location is accepted.")]
-    private UnityEvent<MixedRealityPose> locationFound = new UnityEvent<MixedRealityPose>();
+    private GameObject userInterface;
+
+    [SerializeField]
+    private GameObject handMenu;
 
     private float delayMoment;
     private float initTime;
-    private Vector3? foundPosition = null;
-    private Vector3 previousPosition = Vector3.positiveInfinity;
     private SolverHandler solverHandler;
-
-    [SerializeField]
-    [Tooltip("Radial view object when the code starts")]
-    private RadialView radialView;
 
     // Awake is called during the loading
     private void Awake()
     {
-        solverHandler = surfaceMagnet.GetComponent<SolverHandler>();
-        radialView = surfaceMagnet.GetComponent<RadialView>();
-        surfaceMagnet.enabled = false;
+        solverHandler = radialView.GetComponent<SolverHandler>();
         radialView.enabled = true;
         initTime = Time.time + 2;
+        handMenu.SetActive(true);
     }
 
     private void OnEnable()
@@ -52,63 +41,35 @@ public class PlatformFinder : MonoBehaviour
 
     private void Update()
     {
-        CheckLocationOnSurface();
+        CheckRadialViewDisable();
     }
 
     public void Reset()
     {
-        previousPosition = Vector3.positiveInfinity;
-        delayMoment = Time.time + 2;
-        foundPosition = null;
-        lookPrompt.SetActive(true);
-        confirmPrompt.SetActive(false);
         solverHandler.enabled = true;
+        radialView.enabled = true;
+        initTime = Time.time + 2;
+        userInterface.SetActive(false);
+        objectToPlaceHandler.SetActive(true);
+        handMenu.SetActive(true);
     }
 
     public void Accept()
     {
-        if (foundPosition != null)
-        {
-            locationFound?.Invoke(new MixedRealityPose(
-                foundPosition.Value, solverHandler.transform.rotation));
-            lookPrompt.SetActive(false);
-            confirmPrompt.SetActive(false);
-            gameObject.SetActive(false);
-        }
+        objectToPlaceHandler.SetActive(false);
+        gameObject.SetActive(false);
+        userInterface.SetActive(true);
+        handMenu.SetActive(false);
+        locationFoundSound.Play();
     }
 
-    private void CheckLocationOnSurface()
+    private void CheckRadialViewDisable()
     {
         if (Time.time > initTime && radialView.enabled)
         {
             radialView.enabled = false;
-            surfaceMagnet.enabled = true;
+            solverHandler.enabled = false;
             delayMoment = Time.time + 2;
-        }
-
-        if (foundPosition == null && Time.time > delayMoment)
-        {
-            if (surfaceMagnet.OnSurface)
-            {
-                foundPosition = surfaceMagnet.transform.position;
-            }
-
-            if (foundPosition != null)
-            {
-                var isMoving = Mathf.Abs((previousPosition - foundPosition.Value).magnitude) > 0.005;
-                previousPosition = foundPosition.Value;
-                if (!isMoving)
-                {
-                    solverHandler.enabled = false;
-                    lookPrompt.SetActive(false);
-                    confirmPrompt.SetActive(true);
-                    locationFoundSound.Play();
-                }
-                else
-                {
-                    foundPosition = null;
-                }
-            }
         }
     }
 }

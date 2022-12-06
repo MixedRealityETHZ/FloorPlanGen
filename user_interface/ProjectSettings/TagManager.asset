@@ -8,6 +8,8 @@ TagManager:
   - Node
   - Model
   - GenerateButton
+  - Outline
+  - UserInterface
   layers:
   - Default
   - TransparentFX
