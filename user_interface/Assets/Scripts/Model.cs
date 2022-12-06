@@ -8,15 +8,12 @@ public class Model : MonoBehaviour
 {
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
-    private GameObject[] outline;
 
     // Origin of the outline (to get positions of objects with respect to this origin)
     private Vector3 origin;
     private float originYAngle;
-    // TODO: change this so outline is generated from code (to integrate with API)
-    private static int outlinePositionCount = 7;
-    private Vector3[] boundaries = new Vector3[outlinePositionCount];
-    private Vector3 outlineScale;
+    private GameObject outline;
+    private List<Vector3> outlinePoints;
 
     public Material finalLinkMaterial;
     public float finalLinkWidth;
@@ -37,10 +34,25 @@ public class Model : MonoBehaviour
             var node = gameObject.GetComponent<Node>();
             listOfNodes.Add(node);
         }
-        outline = GameObject.FindGameObjectsWithTag("Outline");
 
-        outlineScale = outline[0].transform.localScale;
-        outline[0].GetComponent<LineRenderer>().GetPositions(boundaries);
+        // Hide UserInterface
+        GameObject.FindGameObjectsWithTag("UserInterface")[0].gameObject.SetActive(false);
+
+        outline = GameObject.FindGameObjectsWithTag("Outline")[0];
+
+        // TODO: change with API call to initialize boundary
+        outlinePoints = new List<Vector3>()
+        {
+            new Vector3(-1f, 0f, -1f),
+            new Vector3(9.2f/20.0f, 0f, 0f),
+            new Vector3(9.2f/20.0f, 0f, 6f/20.0f),
+            new Vector3(14f/20.0f, 0f, 6f/20.0f),
+            new Vector3(14f/20.0f, 0f, 18f/20.0f),
+            new Vector3(0f, 0f, 18f/20.0f),
+            new Vector3(0f, 0f, 0f),
+        };
+        createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
+
     }
 
     // Update is called once per frame
@@ -54,22 +66,20 @@ public class Model : MonoBehaviour
         }
 
         // Update outline origin positions
-        origin = outline[0].transform.position;
-        originYAngle = outline[0].transform.localEulerAngles.y;
+        origin = outline.transform.position;
+        originYAngle = outline.transform.localEulerAngles.y;
+
+        Debug.Log(outline.GetComponent<LineRenderer>().GetPosition(0));
     }
 
-    private bool checkNodeIsInOutline(Node node)
+    private void createOutlineFromPoints(List<Vector3> points)
     {
-        // TODO: change this to use mesh collider?
-        Vector3 loc = node.getSphereBaseCoordinates() - origin;
-        var x = loc[0];
-        var z = loc[2];
-        if (x > boundaries[0][0] & z > boundaries[0][2] & x < boundaries[2][0] * outlineScale[0] & z < boundaries[2][0] * outlineScale[2])
-            return true;
-        if (x > boundaries[0][0] & z > boundaries[2][2] * outlineScale[2] & x < boundaries[4][0] * outlineScale[0] & z < boundaries[4][2] * outlineScale[2])
-            return true;
-        return false;
+        outline.GetComponent<LineRenderer>().positionCount = points.Count;
+        outline.GetComponent<LineRenderer>().SetPositions(points.ToArray());
+        outline.gameObject.transform.GetChild(0).gameObject.transform.position = points[0]; // TODO: change to use the actual origin of outline sent by the API
+        outline.transform.position = new Vector3(0f, -0.2f, 1.0f); // moves outline to user field of vue
     }
+
 
     public void updateLink(Node node1, Node node2)
     {
@@ -109,6 +119,13 @@ public class Model : MonoBehaviour
         }
     }
 
+    // Getters
+
+    public List<Vector3> getOutlinePoints()
+    {
+        return outlinePoints;
+    }
+
     // Export graph to JSON
 
     [System.Serializable]
@@ -132,7 +149,7 @@ public class Model : MonoBehaviour
         graph.Nodes = new List<NodeExport>();
         foreach (var node in listOfNodes)
         {
-            if(checkNodeIsInOutline(node))
+            if (node.inOutline())
                 graph.Nodes.Add(node.getNode());
         }
 
