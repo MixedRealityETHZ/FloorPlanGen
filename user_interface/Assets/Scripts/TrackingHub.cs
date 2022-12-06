@@ -5,7 +5,6 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using UnityEngine;
 using Vuforia;
-using static UnityEditor.Progress;
 
 public class TrackingHub : MonoBehaviour
 {
