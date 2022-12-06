@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
 using UnityEngine;
 using Vuforia;
 
@@ -87,11 +84,9 @@ public class TrackingHub : MonoBehaviour
         }
     }
 
-    void modelTargetUpdate(int modelTargetID, GameObject modelTarget)
+    void modelTargetUpdateStatus(int modelTargetID, GameObject modelTarget, GameObject UI)
     {
         Vuforia.ModelTargetBehaviour modelTargetBehaviour = modelTarget.GetComponent<ModelTargetBehaviour>();
-        GameObject UI;
-        UIs.TryGetValue(modelTargetID, out UI);
 
         //Check tracking status
         bool previousStatus;
@@ -103,17 +98,40 @@ public class TrackingHub : MonoBehaviour
             UI.GetComponent<Node>().updateTrackingStatus(currentTrackingStatus);
             previousTrackingStatus[modelTargetID] = currentTrackingStatus;
         }
+    }
 
-        //Update UI orientation and position
+    void modelTargetUpdatePosition(GameObject modelTarget, GameObject UI)
+    {
         //Set position of the UI according to the model target
         Vector3 trackedPosition = modelTarget.transform.position;
-        UI.transform.position = new Vector3(trackedPosition.x, trackedPosition.y + 0.02f, trackedPosition.z); //ToDo: Coller le y sur une surface
+        UI.transform.position = new Vector3(trackedPosition.x, trackedPosition.y + 0.02f, trackedPosition.z);
+    }
 
+    void modelTargetUpdateOrientation(GameObject modelTarget, GameObject UI)
+    {
         //Set the orientation such that face the user i.e. the camera
+        Vector3 trackedPosition = modelTarget.transform.position;
         Vector3 lookDir = trackedPosition - Camera.main.transform.position; //Direction in this way as the will actually look at the back of the UI
         lookDir.y = 0.0f;
         Quaternion rot = Quaternion.LookRotation(lookDir, Vector3.up);
         UI.transform.rotation = rot;
+    }
+
+    void modelTargetUpdate(int modelTargetID, GameObject modelTarget)
+    {
+        Vuforia.ModelTargetBehaviour modelTargetBehaviour = modelTarget.GetComponent<ModelTargetBehaviour>();
+        GameObject UI;
+        UIs.TryGetValue(modelTargetID, out UI);
+
+        //Check tracking status
+        modelTargetUpdateStatus(modelTargetID, modelTarget, UI);
+
+        //Update UI orientation and position
+        //Set position of the UI according to the model target
+        modelTargetUpdatePosition(modelTarget, UI);
+
+        //Set the orientation such that face the user i.e. the camera
+        modelTargetUpdateOrientation(modelTarget, UI);
     }
 
     // Update is called once per frame
@@ -139,22 +157,26 @@ public class TrackingHub : MonoBehaviour
             setTarget(1);
         }
 
-
-        //In manual tracking, don't need to go throught all target, only the one selected
-        if (manualTracking)
+        foreach (KeyValuePair<int, GameObject> item in modelTargets)
         {
-            GameObject modelTarget;
-            modelTargets.TryGetValue(trackedTargetID, out modelTarget);
+            int modelTargetID = item.Key;
+            GameObject modelTarget = item.Value;
+            GameObject UI;
+            UIs.TryGetValue(modelTargetID, out UI);
 
-            modelTargetUpdate(trackedTargetID, modelTarget);
-        }
-        else //Otherwise loop throught all modelTargets
-        {
-            foreach (KeyValuePair<int, GameObject> item in modelTargets)
+            if (manualTracking)
             {
-                int modelTargetID = item.Key;
-                GameObject modelTarget = item.Value;
-
+                if (modelTargetID == trackedTargetID)
+                {
+                    modelTargetUpdate(modelTargetID, modelTarget);
+                }
+                else
+                {
+                    modelTargetUpdateOrientation(modelTarget, UI);
+                }
+            }
+            else
+            {
                 modelTargetUpdate(modelTargetID, modelTarget);
             }
         }
