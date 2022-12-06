@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Model : MonoBehaviour
 {
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
     private GameObject[] outline;
+
+    // Origin of the outline (to get positions of objects with respect to this origin)
+    private Vector3 origin;
+    private float originYAngle;
+    // TODO: change this so outline is generated from code (to integrate with API)
     private static int outlinePositionCount = 7;
     private Vector3[] boundaries = new Vector3[outlinePositionCount];
     private Vector3 outlineScale;
-
-    // TODO: outline integration
-    // Origin of the outline (to get positions of objects with respect to this origin)
-    private Vector3 origin;
 
     public Material finalLinkMaterial;
     public float finalLinkWidth;
@@ -35,7 +38,7 @@ public class Model : MonoBehaviour
             listOfNodes.Add(node);
         }
         outline = GameObject.FindGameObjectsWithTag("Outline");
-        origin = outline[0].transform.position;
+
         outlineScale = outline[0].transform.localScale;
         outline[0].GetComponent<LineRenderer>().GetPositions(boundaries);
     }
@@ -49,11 +52,15 @@ public class Model : MonoBehaviour
             link.lineRenderer.SetPosition(0, link.node1.getSphereBaseCoordinates()); //x,y and z position of the starting point of the line
             link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
         }
+
+        // Update outline origin positions
         origin = outline[0].transform.position;
+        originYAngle = outline[0].transform.localEulerAngles.y;
     }
 
     private bool checkNodeIsInOutline(Node node)
     {
+        // TODO: change this to use mesh collider?
         Vector3 loc = node.getSphereBaseCoordinates() - origin;
         var x = loc[0];
         var z = loc[2];
@@ -146,7 +153,7 @@ public class Model : MonoBehaviour
     public void generateFloorPlan()
     {
         GameObject button = GameObject.FindGameObjectsWithTag("GenerateButton")[0];
-        StartCoroutine(Wait(4f, button)); // Asynchronous request
+        StartCoroutine(Wait(1f, button)); // Asynchronous request
     }
 
     public IEnumerator Wait(float delayInSecs, GameObject button)
@@ -157,5 +164,18 @@ public class Model : MonoBehaviour
 
         Debug.Log(exportGraphToJson());
         button.GetComponent<ButtonLoader>().stopLoading();
+
+        // Do the action, TODO: move elsewhere
+        visualizeMeshFloorPlanLayer(2);
+    }
+
+    // Visualization of the floor plan
+
+    public void visualizeMeshFloorPlanLayer(int layers) // layers=0 means to not show the floor plan
+    {
+        GameObject loadedObject = (GameObject) Instantiate(Resources.Load("01_house_slice01")); // TODO: change for API
+        loadedObject.transform.position = origin;
+        loadedObject.transform.eulerAngles = new Vector3(0.00f, 180.0f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
+        loadedObject.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
     }
 }
