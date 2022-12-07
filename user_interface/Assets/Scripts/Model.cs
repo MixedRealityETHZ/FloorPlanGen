@@ -1,10 +1,8 @@
+using Microsoft.MixedReality.Toolkit.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.UI.Image;
-
 public class Model : MonoBehaviour
 {
     private List<Node> listOfNodes = new List<Node>();
@@ -18,8 +16,13 @@ public class Model : MonoBehaviour
     private List<Vector3> transformedOutlinePoints;
     private Vector3 transformedOrigin;
 
+    // Mesh Slices
+    public int layerNumber; // Default layer number
+    private List<GameObject> slices = new List<GameObject>();
+
     public Material finalLinkMaterial;
     public float finalLinkWidth;
+    public Vector3 initialOutlinePosition;
 
     class Link
     {
@@ -36,6 +39,7 @@ public class Model : MonoBehaviour
         {
             var node = gameObject.GetComponent<Node>();
             listOfNodes.Add(node);
+            gameObject.SetActive(false); // Furniture UI is not visible until it is tracked a first time
         }
 
         // Hide UserInterface
@@ -68,6 +72,7 @@ public class Model : MonoBehaviour
         {
             transformedOutlinePoints[i] = rotation * (outlinePoints[i] - origin) + transformedOrigin;
         }
+        originYAngle = outline.transform.localEulerAngles.y;
 
         //Debug
         //outline.transform.position = new Vector3(0f, 0f, 0f); // moves outline to user field of vue
@@ -84,10 +89,6 @@ public class Model : MonoBehaviour
             link.lineRenderer.SetPosition(0, link.node1.getSphereBaseCoordinates()); //x,y and z position of the starting point of the line
             link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
         }
-
-        // Update outline origin positions
-        //transformedOrigin = outline.transform.position;
-        originYAngle = outline.transform.localEulerAngles.y;
     }
 
     private void createOutlineFromPoints(List<Vector3> points)
@@ -95,9 +96,21 @@ public class Model : MonoBehaviour
         outline.GetComponent<LineRenderer>().positionCount = points.Count;
         outline.GetComponent<LineRenderer>().SetPositions(points.ToArray());
         outline.gameObject.transform.GetChild(0).gameObject.transform.position = origin;
-        outline.transform.position = new Vector3(0f, -0.2f, 1.0f); // moves outline to user field of vue
+        moveOutlineInFrontOfUser();
     }
 
+    public void moveOutlineInFrontOfUser()
+    {
+        outline.transform.position = initialOutlinePosition; // moves outline to user field of vue
+        outline.transform.eulerAngles = new Vector3(0f,0f,0f);
+    }
+
+    public void updateLayerNumber(SliderEventData eventData)
+    {
+        // Call this function when the slider value changes
+        layerNumber = (int)(eventData.NewValue * 4);
+        visualizeMeshFloorPlanLayer(layerNumber);
+    }
 
     public void updateLink(Node node1, Node node2)
     {
@@ -201,16 +214,40 @@ public class Model : MonoBehaviour
         button.GetComponent<ButtonLoader>().stopLoading();
 
         // Do the action, TODO: move elsewhere
-        visualizeMeshFloorPlanLayer(2);
+        createMeshObjects();
     }
+
+    public void createMeshObjects()
+    {
+        // TODO: change to adapt to API
+        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice01")));
+        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice02")));
+        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice03")));
+        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice04")));
+
+        foreach (var slice in slices) {
+            slice.transform.position = transformedOrigin;
+            slice.transform.eulerAngles = new Vector3(0.00f, 180.0f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
+            slice.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            slice.SetActive(false);
+        }
+        visualizeMeshFloorPlanLayer(layerNumber);
+    }
+
 
     // Visualization of the floor plan
 
     public void visualizeMeshFloorPlanLayer(int layers) // layers=0 means to not show the floor plan
     {
-        GameObject loadedObject = (GameObject) Instantiate(Resources.Load("01_house_slice01")); // TODO: change for API
-        loadedObject.transform.position = transformedOrigin;
-        loadedObject.transform.eulerAngles = new Vector3(0.00f, 180.0f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
-        loadedObject.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        if (layers <= slices.Count) {
+            for (int i = 0; i < layers; i++)
+            {
+                slices[i].SetActive(true);
+            }
+            for (int i = 0; i < slices.Count - layers; i++)
+            {
+                slices[slices.Count - 1 - i].SetActive(false);
+            }
+        }
     }
 }

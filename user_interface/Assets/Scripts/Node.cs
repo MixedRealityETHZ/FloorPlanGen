@@ -4,7 +4,6 @@ using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using System.Runtime.CompilerServices;
 using System;
-using Unity.VisualScripting;
 
 public class Node : MonoBehaviour // attached to FurnitureUI
 {
@@ -21,31 +20,25 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     private float maxSize = 40;
     private Vector3 referencePosition;
-
-    // TODO: outline integration
-    // Boolean that says wether the object is inside or outside
+    private GameObject referenceObj;
+    private GameObject trackingIndicator;
+    private Transform target;
 
     // Start is called before the first frame update
     void Start()
     {
         model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>();
+        referenceObj = gameObject.transform.Find("Center").gameObject; // Center is the reference object for position and rotation
+        trackingIndicator = gameObject.transform.Find("TrackingIndicator").gameObject;
+        target = trackingIndicator.transform.GetChild(0).gameObject.transform.GetChild(0);
+
         updateTrackingStatus(false);
-        //gameObject.SetActive(false); // TODO: find a solution to disable UI when objects have not been tracked yet, but they shoudl still be registered in the model
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject referenceObj = gameObject.transform.Find("TrackingIndicator").gameObject; // TrackingIndicator is the reference object for position and rotation
-
-        // Position
         referencePosition = referenceObj.transform.position;
-        location[0] = referencePosition[0]; // TODO: change to get location relative to boundary curve plane
-        location[1] = referencePosition[2];
-        
-        // Rotation
-        rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
-
         setTrackingIndicatorColor();
     }
 
@@ -146,6 +139,13 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public NodeExport getNode()
     {
+        // Position
+        location[0] = referencePosition[0]; // TODO: change to get location relative to boundary curve plane
+        location[1] = referencePosition[2];
+
+        // Rotation
+        rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
+
         NodeExport node = new NodeExport();
         node.ID = id;
         node.objectname = objectName;
@@ -177,15 +177,11 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         this.trackingStatus = trackingStatus;
 
         gameObject.SetActive(true);
-        GameObject trackingIndicator = gameObject.transform.Find("TrackingIndicator").gameObject;
         trackingIndicator.GetComponent<CustomProgressIndicatorObjectDisplay>().rotationActive = trackingStatus;
     }
 
     public void setTrackingIndicatorColor()
     {
-        GameObject trackingIndicator = gameObject.transform.Find("TrackingIndicator").gameObject;
-        Transform target = trackingIndicator.transform.GetChild(0).gameObject.transform.GetChild(0);
-
         if (trackingStatus)
         {
             if (inOutline())
@@ -193,7 +189,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
                 target.GetComponent<Renderer>().material.color = new Color(0.16f, 1.0f, 0.0f); // Green
             } else
             {
-                target.GetComponent<Renderer>().material.color = new Color(0.16f, 1.0f, 0.0f); // Green
+                target.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 0.0f); // Red
             }
         } else
         {

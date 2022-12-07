@@ -1,7 +1,4 @@
-using Microsoft.MixedReality.Toolkit.Utilities;
-using Microsoft.MixedReality.Toolkit.Utilities.Solvers;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlatformFinder : MonoBehaviour
 {
@@ -16,14 +13,18 @@ public class PlatformFinder : MonoBehaviour
     [SerializeField]
     private GameObject handMenu;
 
+    private Model model;
+
     public void Start()
     {
+        model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>();
         audioPlayer = GetComponent<AudioSource>();
     }
 
     public void Reset()
     {
-        // TODO: place 
+        // Place outline in front of user field of view
+        model.moveOutlineInFrontOfUser();
     }
 
     public void Accept()
@@ -33,7 +34,6 @@ public class PlatformFinder : MonoBehaviour
         userInterface.SetActive(true);
         audioPlayer.Play();
 
-        Model model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>();
         model.onConfirmOutline();
     }
 }
