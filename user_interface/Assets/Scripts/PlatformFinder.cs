@@ -16,7 +16,6 @@ public class PlatformFinder : MonoBehaviour
     [SerializeField]
     private GameObject handMenu;
 
-
     public void Start()
     {
         audioPlayer = GetComponent<AudioSource>();
@@ -33,5 +32,8 @@ public class PlatformFinder : MonoBehaviour
         handMenu.SetActive(false);
         userInterface.SetActive(true);
         audioPlayer.Play();
+
+        Model model = GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>();
+        model.onConfirmOutline();
     }
 }

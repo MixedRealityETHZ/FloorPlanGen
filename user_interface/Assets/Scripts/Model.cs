@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.UI.Image;
 
 public class Model : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class Model : MonoBehaviour
     private List<Link> listOfLinks = new List<Link>();
 
     // Origin of the outline (to get positions of objects with respect to this origin)
-    private Vector3 origin;
     private float originYAngle;
     private GameObject outline;
     private List<Vector3> outlinePoints;
+    private Vector3 origin; //Point given by API as bottom left corner of the outline TODO: change to use the actual origin of outline sent by the API
+    private List<Vector3> transformedOutlinePoints;
+    private Vector3 transformedOrigin;
 
     public Material finalLinkMaterial;
     public float finalLinkWidth;
@@ -41,9 +44,10 @@ public class Model : MonoBehaviour
         outline = GameObject.FindGameObjectsWithTag("Outline")[0];
 
         // TODO: change with API call to initialize boundary
+        origin = new Vector3(0f, 0f, 0f);
         outlinePoints = new List<Vector3>()
         {
-            new Vector3(-1f, 0f, -1f),
+            new Vector3(0f, 0f, 0f),
             new Vector3(9.2f/20.0f, 0f, 0f),
             new Vector3(9.2f/20.0f, 0f, 6f/20.0f),
             new Vector3(14f/20.0f, 0f, 6f/20.0f),
@@ -53,6 +57,22 @@ public class Model : MonoBehaviour
         };
         createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
 
+    }
+
+    public void onConfirmOutline()
+    {
+        Quaternion rotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
+        transformedOrigin = outline.transform.position; //ToDo: take ball position??
+        transformedOutlinePoints = new List<Vector3>(new Vector3[outlinePoints.Count]);
+        for (int i = 0; i < outlinePoints.Count; i += 1)
+        {
+            transformedOutlinePoints[i] = rotation * (outlinePoints[i] - origin) + transformedOrigin;
+        }
+
+        //Debug
+        //outline.transform.position = new Vector3(0f, 0f, 0f); // moves outline to user field of vue
+        //outline.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        //outline.GetComponent<LineRenderer>().SetPositions(transformedOutlinePoints.ToArray());
     }
 
     // Update is called once per frame
@@ -66,17 +86,15 @@ public class Model : MonoBehaviour
         }
 
         // Update outline origin positions
-        origin = outline.transform.position;
+        //transformedOrigin = outline.transform.position;
         originYAngle = outline.transform.localEulerAngles.y;
-
-        Debug.Log(outline.GetComponent<LineRenderer>().GetPosition(0));
     }
 
     private void createOutlineFromPoints(List<Vector3> points)
     {
         outline.GetComponent<LineRenderer>().positionCount = points.Count;
         outline.GetComponent<LineRenderer>().SetPositions(points.ToArray());
-        outline.gameObject.transform.GetChild(0).gameObject.transform.position = points[0]; // TODO: change to use the actual origin of outline sent by the API
+        outline.gameObject.transform.GetChild(0).gameObject.transform.position = origin;
         outline.transform.position = new Vector3(0f, -0.2f, 1.0f); // moves outline to user field of vue
     }
 
@@ -121,9 +139,9 @@ public class Model : MonoBehaviour
 
     // Getters
 
-    public List<Vector3> getOutlinePoints()
+    public List<Vector3> getTransformedOutlinePoints()
     {
-        return outlinePoints;
+        return transformedOutlinePoints;
     }
 
     // Export graph to JSON
@@ -191,7 +209,7 @@ public class Model : MonoBehaviour
     public void visualizeMeshFloorPlanLayer(int layers) // layers=0 means to not show the floor plan
     {
         GameObject loadedObject = (GameObject) Instantiate(Resources.Load("01_house_slice01")); // TODO: change for API
-        loadedObject.transform.position = origin;
+        loadedObject.transform.position = transformedOrigin;
         loadedObject.transform.eulerAngles = new Vector3(0.00f, 180.0f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
         loadedObject.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
     }

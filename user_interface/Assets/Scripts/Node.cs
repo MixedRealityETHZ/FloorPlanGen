@@ -57,13 +57,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public bool inOutline()
     {
-        var points = model.getOutlinePoints();
-        //for (int i = 0; i < points.Count; i += 1)
-        //{
-        //    Vector3 point
-        //}
-
-        return PointInPolygon(referencePosition, model.getOutlinePoints());
+        return PointInPolygon(referencePosition, model.getTransformedOutlinePoints());
         // TODO: referencePosition is the diamond, so it move with the user -> find a fix point
     }
 
