@@ -11,9 +11,9 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     public int id; // user-specified
     public string objectName; // user-specified
     public string displayName; // user-specified
-    // public bool isTracked = false; // only for testing (TODO: remove)
 
     private Model model;
+    private bool trackingStatus;
 
     private Vector2 location;
     private float rotation;
@@ -46,7 +46,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         // Rotation
         rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
 
-        // updateTrackingStatus(isTracked); // only for testing (TODO: remove)
+        setTrackingIndicatorColor();
     }
 
     public void updateObjectSize(SliderEventData eventData)
@@ -174,16 +174,37 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public void updateTrackingStatus(bool trackingStatus)
     {
+        this.trackingStatus = trackingStatus;
+
         gameObject.SetActive(true);
         GameObject trackingIndicator = gameObject.transform.Find("TrackingIndicator").gameObject;
         trackingIndicator.GetComponent<CustomProgressIndicatorObjectDisplay>().rotationActive = trackingStatus;
+    }
+
+    public void setTrackingIndicatorColor()
+    {
+        GameObject trackingIndicator = gameObject.transform.Find("TrackingIndicator").gameObject;
         Transform target = trackingIndicator.transform.GetChild(0).gameObject.transform.GetChild(0);
+
         if (trackingStatus)
         {
-            target.GetComponent<Renderer>().material.color = new Color(0.16f, 1.0f, 0.0f); // Green
+            if (inOutline())
+            {
+                target.GetComponent<Renderer>().material.color = new Color(0.16f, 1.0f, 0.0f); // Green
+            } else
+            {
+                target.GetComponent<Renderer>().material.color = new Color(0.16f, 1.0f, 0.0f); // Green
+            }
         } else
         {
-            target.GetComponent<Renderer>().material.color = new Color(0.0f, 0.576f, 1.0f); // Blue
+            if (inOutline())
+            {
+                target.GetComponent<Renderer>().material.color = new Color(0.0f, 0.576f, 1.0f); // Blue
+            }
+            else
+            {
+                target.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 0.0f); // Red
+            }
         }
     }
 }
