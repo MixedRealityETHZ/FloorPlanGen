@@ -16,7 +16,7 @@ public class Model : MonoBehaviour
     private List<Link> listOfLinks = new List<Link>();
 
     // Origin of the outline (to get positions of objects with respect to this origin)
-    private float originYAngle;
+    private float originYAngle = 0f;
     private GameObject outline;
     private List<Vector3> outlinePoints;
     private Vector3 origin; //Point given by API as bottom left corner of the outline TODO: change to use the actual origin of outline sent by the API
@@ -55,10 +55,8 @@ public class Model : MonoBehaviour
 
             foreach (var point in jsonarray)
             {
-                outlinePoints.Add(new Vector3(point[0] / 20f, point[1] / 20f, point[2] / 20f));
+                outlinePoints.Add(new Vector3(point[0] / 20f, point[2] / 20f, point[1] / 20f));
             }
-
-            
 
             createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
         }
@@ -237,18 +235,24 @@ public class Model : MonoBehaviour
         sendReceive.sendGraphClient();
     }
 
-    public void finishMeshGeneration()
+    public void finishMeshGeneration(GameObject loadedObj)
     {
-        createMeshObjects();
+        //so that we only load one mesh/slices each time
+        foreach (var item in slices)
+        {
+            Destroy(item);
+        }
+
+        slices.Clear();
+        Debug.Log("Displaying mesh on client");
+        createMeshObjects(loadedObj);
         generationButton.GetComponent<ButtonLoader>().stopLoading();
     }
 
-    public void createMeshObjects()
+    public void createMeshObjects(GameObject loadedObj)
     {
         //TODO use slices instead of mesh
-        //Debug.Log(GameObject.FindGameObjectsWithTag("LoadedMesh").Length);
-        //Debug.Log(slices.Count);
-        slices.Add(GameObject.FindGameObjectsWithTag("LoadedMesh")[0]);
+        slices.Add(loadedObj);
         slices.Add(new GameObject());
         slices.Add(new GameObject());
         slices.Add(new GameObject());
@@ -259,9 +263,19 @@ public class Model : MonoBehaviour
 
         foreach (var slice in slices) {
             slice.transform.position = transformedOrigin;
-            slice.transform.eulerAngles = new Vector3(0.00f, 180.0f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
+            slice.transform.eulerAngles = new Vector3(0.00f, 180f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
             slice.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             slice.SetActive(false);
+        }
+        Debug.Log("mesh pos " + loadedObj.transform.position);
+
+        foreach (var obje in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+        {
+            if (obje.name == "mesh")
+            {
+                Debug.Log(obje.name);
+                Debug.Log(obje.transform.position);
+            }
         }
         visualizeMeshFloorPlanLayer(layerNumber);
     }

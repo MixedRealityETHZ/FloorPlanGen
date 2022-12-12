@@ -190,21 +190,21 @@ public class SendReceive : MonoBehaviourPun
     {
         if (GameObject.Find("/mesh"))
         {
+            Debug.Log("found mesh");
             Destroy(GameObject.Find("/mesh"));
         }
 
         var textStream = new MemoryStream(Encoding.UTF8.GetBytes(objString));
         var loadedObj = new OBJLoader().Load(textStream);
         loadedObj.name = "mesh";
-        loadedObj.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
-        //because it will appear through models.cs in createMeshObjects()
-        //loadedObj.SetActive(true);
-        loadedObj.tag = "LoadedMesh";
+        //Debug.Log("mesh pos " + loadedObj.transform.position);
 
-        //TODO this must be deleted on server side because it does not know Model
+        //loadedObj.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+
         //so the whole function can be deleted
-        GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>().finishMeshGeneration();
+        GameSettingsSingleton.Instance.meshJsonString = "";
+        GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>().finishMeshGeneration(loadedObj);
 
     }
 

@@ -1,1 +1,1 @@
-{"Nodes":[{"ID":0,"objectname":"table","location":{"x":0.0,"y":0.6000000238418579},"rotation":311.2685852050781,"size":20.0},{"ID":1,"objectname":"doubleBed","location":{"x":0.25,"y":0.6000000238418579},"rotation":88.99491119384766,"size":20.0},{"ID":2,"objectname":"simpleBedA","location":{"x":0.5,"y":0.6000000238418579},"rotation":89.50239562988281,"size":20.0}],"Edges":[]}
+{"Nodes":[{"ID":1,"objectname":"doubleBed","location":{"x":0.25,"y":0.6000000238418579},"rotation":22.619861602783204,"size":20.0}],"Edges":[]}
