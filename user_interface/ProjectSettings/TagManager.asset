@@ -10,6 +10,7 @@ TagManager:
   - GenerateButton
   - Outline
   - UserInterface
+  - CameraUI
   layers:
   - Default
   - TransparentFX

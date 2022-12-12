@@ -41,6 +41,8 @@ public class Model : MonoBehaviour
             listOfNodes.Add(node);
             gameObject.SetActive(false); // Furniture UI is not visible until it is tracked a first time
         }
+        //Same for the cameraUI
+        GameObject.FindGameObjectsWithTag("CameraUI")[0].SetActive(false);
 
         // Hide UserInterface
         GameObject.FindGameObjectsWithTag("UserInterface")[0].gameObject.SetActive(false);

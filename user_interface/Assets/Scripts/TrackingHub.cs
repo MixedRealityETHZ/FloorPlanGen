@@ -11,21 +11,36 @@ public class TrackingHub : MonoBehaviour
     private bool manualTracking = false;
     private int trackedTargetID;
 
+    //Camera
+    private GameObject cameraUI;
+    private GameObject cameraTarget;
+    private bool cameraPreviousTrackingStatus = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Furnitures UI
         var tmpUIList = GameObject.FindGameObjectsWithTag("Node");
         foreach (var gameObject in tmpUIList)
         {
             UIs.Add(gameObject.GetComponent<Node>().id, gameObject);
         }
+        //Camera UI
+        cameraUI = GameObject.FindGameObjectsWithTag("CameraUI")[0];
 
         foreach (Transform childT in transform)
         {
             GameObject child = childT.gameObject;
             int childID = child.GetComponent<ModelTargetID>().id;
-            modelTargets.Add(childID, child);
-            previousTrackingStatus.Add(childID, false);
+            if (childID > 0)
+            {
+                modelTargets.Add(childID, child);
+                previousTrackingStatus.Add(childID, false);
+            }
+            else
+            {
+                cameraTarget = child;
+            }
         }
 
         System.Diagnostics.Debug.Assert(UIs.Count == modelTargets.Count);
@@ -134,6 +149,22 @@ public class TrackingHub : MonoBehaviour
         modelTargetUpdateOrientation(modelTarget, UI);
     }
 
+    void cameraUpdate()
+    {
+        Vuforia.ModelTargetBehaviour modelTargetBehaviour = cameraTarget.GetComponent<ModelTargetBehaviour>();
+        //Check tracking status
+        bool currentTrackingStatus = (modelTargetBehaviour.TargetStatus.Status == Vuforia.Status.TRACKED);
+        if (cameraPreviousTrackingStatus != currentTrackingStatus)
+        {
+            UnityEngine.Debug.Log("[TrackingHub] CameraTarget: tracking status is " + currentTrackingStatus.ToString());
+            cameraUI.GetComponent<CameraUI>().updateTrackingStatus(currentTrackingStatus);
+            cameraPreviousTrackingStatus = currentTrackingStatus;
+        }
+
+        modelTargetUpdatePosition(cameraTarget, cameraUI);
+        modelTargetUpdateOrientation(cameraTarget, cameraUI);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -156,7 +187,8 @@ public class TrackingHub : MonoBehaviour
         {
             setTarget(1);
         }
-
+           
+        //Furnitures tracking
         foreach (KeyValuePair<int, GameObject> item in modelTargets)
         {
             int modelTargetID = item.Key;
@@ -180,5 +212,7 @@ public class TrackingHub : MonoBehaviour
                 modelTargetUpdate(modelTargetID, modelTarget);
             }
         }
+        //Camera tracking
+        cameraUpdate();
     }
 }

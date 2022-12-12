@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v5.7.2">
+        <ModelTarget name="camera" targetId="c151733e72b840cbb4ae885cb8808eed" version="13.0" toolVersion="v5.7.2" bbox="-0.024416 -0.000023 -0.028697 0.027379 0.050594 0.025515" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="camera" assemblyId="f4b5d39241af4926a895f59394b566d8">
+        <Part name="camera" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>
