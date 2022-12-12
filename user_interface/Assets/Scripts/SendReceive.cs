@@ -32,42 +32,6 @@ public class SendReceive : MonoBehaviourPun
 
     }
 
-    private void Update()
-    {
-
-        //send boundary request
-        /*if (Input.GetKeyDown(KeyCode.B)) // TODO send through UI buttons
-        {
-            if (PhotonNetwork.NickName == "client")
-            {
-                Debug.Log("sendBoundaryRequest");
-                int boundaryID = 0; // get this from UI
-                _SendBoundrayRequest2Server(boundaryID);
-            }
-        }*/
-
-        //send graph
-        /*else if (Input.GetKeyDown(KeyCode.G)) // TODO send through UI buttons
-        {
-            if (PhotonNetwork.NickName == "client")
-            {
-                Debug.Log("sendGraph");
-                _SendGraph2Server();
-            }
-        }*/
-
-        //send mesh
-        /*else if (Input.GetKeyDown(KeyCode.M)) // TODO send when you detect change in the OBJ file saved by grasshopper
-        {
-            if (PhotonNetwork.NickName == "server")
-            {
-                Debug.Log("spawnMesh");
-                _SpawnMesh();
-                // you can use the FileSystemWatcher to detect file changes
-                _SendMeshData2Client();
-            }
-        }*/
-    }
     private void _SendBoundrayRequest2Server(int boundaryID)
     {
         _photonView.RPC("PunRPC_sendBoundaryRequest", RpcTarget.Others, boundaryID);

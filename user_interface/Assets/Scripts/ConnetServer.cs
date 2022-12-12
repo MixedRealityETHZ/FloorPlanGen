@@ -20,12 +20,11 @@ public class ConnetServer : MonoBehaviourPunCallbacks
         Debug.Log("server connected");
         PhotonNetwork.JoinLobby();
         StartCoroutine(CreateJoinRoom(0.1f));
-        //model.GetComponent<Model>().onServerStart();
     }
 
     public override void OnJoinedRoom()
     {
-        _SetCameraOwnership();
+        //_SetCameraOwnership();
         model.onServerStart();
     }
 

@@ -59,6 +59,7 @@ public class Model : MonoBehaviour
             }
 
             createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
+            outline.SetActive(true);
         }
     }
 
@@ -77,13 +78,14 @@ public class Model : MonoBehaviour
         GameObject.FindGameObjectsWithTag("UserInterface")[0].gameObject.SetActive(false);
 
         outline = GameObject.FindGameObjectsWithTag("Outline")[0];
+        outline.SetActive(false);
     }
     
 
     public void onConfirmOutline()
     {
         Quaternion rotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
-        transformedOrigin = outline.transform.position; //ToDo: take ball position??
+        transformedOrigin = outline.transform.position; //TODO: take ball position??
         transformedOutlinePoints = new List<Vector3>(new Vector3[outlinePoints.Count]);
         for (int i = 0; i < outlinePoints.Count; i += 1)
         {
@@ -125,6 +127,7 @@ public class Model : MonoBehaviour
     {
         outline.transform.position = initialOutlinePosition; // moves outline to user field of vue
         outline.transform.eulerAngles = new Vector3(0f,0f,0f);
+        outline.transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0f); // Also move grabbing sphere
     }
 
     public void updateLayerNumber(SliderEventData eventData)
