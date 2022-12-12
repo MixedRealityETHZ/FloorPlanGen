@@ -6,6 +6,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using Dummiesman;
+using System;
 
 public class SendReceive : MonoBehaviourPun
 {
@@ -15,10 +16,27 @@ public class SendReceive : MonoBehaviourPun
     {
         _photonView = GetComponent<PhotonView>();
     }
+
+    public void sendBoundaryRequestClient()
+    {
+        //Debug.Log("sendBoundaryRequest");
+        int boundaryID = 0; // get this from UI
+        _SendBoundrayRequest2Server(boundaryID);
+
+    }
+
+    public void sendGraphClient()
+    {
+        //Debug.Log("sendGraph");
+        _SendGraph2Server();
+
+    }
+
     private void Update()
     {
+
         //send boundary request
-        if (Input.GetKeyDown(KeyCode.B)) // TODO send through UI buttons
+        /*if (Input.GetKeyDown(KeyCode.B)) // TODO send through UI buttons
         {
             if (PhotonNetwork.NickName == "client")
             {
@@ -26,20 +44,20 @@ public class SendReceive : MonoBehaviourPun
                 int boundaryID = 0; // get this from UI
                 _SendBoundrayRequest2Server(boundaryID);
             }
-        }
+        }*/
 
         //send graph
-        else if (Input.GetKeyDown(KeyCode.G)) // TODO send through UI buttons
+        /*else if (Input.GetKeyDown(KeyCode.G)) // TODO send through UI buttons
         {
             if (PhotonNetwork.NickName == "client")
             {
                 Debug.Log("sendGraph");
                 _SendGraph2Server();
             }
-        }
+        }*/
 
         //send mesh
-        else if (Input.GetKeyDown(KeyCode.M)) // TODO send when you detect change in the OBJ file saved by grasshopper
+        /*else if (Input.GetKeyDown(KeyCode.M)) // TODO send when you detect change in the OBJ file saved by grasshopper
         {
             if (PhotonNetwork.NickName == "server")
             {
@@ -48,11 +66,11 @@ public class SendReceive : MonoBehaviourPun
                 // you can use the FileSystemWatcher to detect file changes
                 _SendMeshData2Client();
             }
-        }
+        }*/
     }
     private void _SendBoundrayRequest2Server(int boundaryID)
     {
-        _photonView.RPC("PunRPC_sendBoundaryRequest", RpcTarget.OthersBuffered, boundaryID);
+        _photonView.RPC("PunRPC_sendBoundaryRequest", RpcTarget.Others, boundaryID);
         Debug.Log("send out boundary request");
     }
 
@@ -68,10 +86,11 @@ public class SendReceive : MonoBehaviourPun
     private void _SendBoundary2Client(int boundaryID)
     {
         string path = Application.dataPath + $"/Resources/boundary{boundaryID}.json"; //make it boundaryID
+        
         if (!string.IsNullOrEmpty(path))
         {
             string jsonString = File.ReadAllText(path);
-            _photonView.RPC("PunRPC_sendBoundary", RpcTarget.AllBuffered, jsonString); //max length 32k
+            _photonView.RPC("PunRPC_sendBoundary", RpcTarget.All, jsonString); //max length 32k
             Debug.Log("send out boundary");
         }
         
@@ -94,8 +113,8 @@ public class SendReceive : MonoBehaviourPun
         string path = Application.dataPath + "/Resources/graph.json";
         string jsonString = File.ReadAllText(path);
         // send graph to both and store in instance
-        _photonView.RPC("PunRPC_sendGraph", RpcTarget.AllBuffered, jsonString); //max length 32k
-        Debug.Log("send out graph");
+        _photonView.RPC("PunRPC_sendGraph", RpcTarget.All, jsonString); //max length 32k
+        Debug.Log("send out graph with json: " + jsonString);
     }
 
     [PunRPC]
@@ -107,7 +126,21 @@ public class SendReceive : MonoBehaviourPun
             //write json
             string path = Application.dataPath + "/Resources/graph.json";
             File.WriteAllText(path, GameSettingsSingleton.Instance.graphJsonString);
+
+            //Send mesh to client when we have all information on graph
+            sendMeshServer();
         }
+
+    }
+
+    public void sendMeshServer()
+    {
+        Debug.Log("Server spawning mesh");
+        _SpawnMesh();
+        // you can use the FileSystemWatcher to detect file changes
+        //TODO we will need to change it to account for the fact that the mesh is not yet generated or will be overwritten
+
+        _SendMeshData2Client();
     }
 
     private void _SendMeshData2Client()
@@ -130,7 +163,7 @@ public class SendReceive : MonoBehaviourPun
 
         Debug.Log($"string length: {stringLength}");
         Debug.Log($"string array length: {objStringArray.Length}");
-        _photonView.RPC("PunPRC_sendMeshBuddle", RpcTarget.AllBuffered, objStringArray);
+        _photonView.RPC("PunPRC_sendMeshBuddle", RpcTarget.All, objStringArray);
     }
 
     [PunRPC]
@@ -164,6 +197,15 @@ public class SendReceive : MonoBehaviourPun
         var loadedObj = new OBJLoader().Load(textStream);
         loadedObj.name = "mesh";
         loadedObj.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+
+        //because it will appear through models.cs in createMeshObjects()
+        //loadedObj.SetActive(true);
+        loadedObj.tag = "LoadedMesh";
+
+        //TODO this must be deleted on server side because it does not know Model
+        //so the whole function can be deleted
+        GameObject.FindGameObjectsWithTag("Model")[0].GetComponent<Model>().finishMeshGeneration();
+
     }
 
     private void _SpawnMesh()
@@ -176,6 +218,7 @@ public class SendReceive : MonoBehaviourPun
         GameObject go = Resources.Load("mesh") as GameObject;
         GameObject meshGo = Instantiate(go, Vector3.zero, Quaternion.identity);
         meshGo.name = "mesh";
+        //Debug.Log("Mesh " + meshGo.name + " spawned");
     }
 
     [PunRPC]

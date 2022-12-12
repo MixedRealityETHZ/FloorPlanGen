@@ -11,6 +11,8 @@ public class HandButtonController : MonoBehaviour
     public GameObject toggleButtonObject;
     public GameObject handButtonObjects;
     public TrackingHub trackingHub;
+    public SendReceive sendReceive;
+    public Model model;
 
     private PressableButtonHoloLens2 toggleButton;
     private PressableButtonHoloLens2[] handButtons;
@@ -111,6 +113,11 @@ public class HandButtonController : MonoBehaviour
         }
     }
 
+    // Send Mesh request to API
+    public void generateFloorPlan(GameObject button)
+    {
+        model.startMeshGeneration(button);
+    }
 
     public void clickAndChangeOthers(GameObject gameobject)
     {

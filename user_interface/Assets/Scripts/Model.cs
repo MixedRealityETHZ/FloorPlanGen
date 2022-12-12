@@ -3,8 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
+using Microsoft.MixedReality.Toolkit;
+using Photon.Pun;
+
 public class Model : MonoBehaviour
 {
+    public SendReceive sendReceive;
+
     private List<Node> listOfNodes = new List<Node>();
     private List<Link> listOfLinks = new List<Link>();
 
@@ -19,6 +26,7 @@ public class Model : MonoBehaviour
     // Mesh Slices
     public int layerNumber; // Default layer number
     private List<GameObject> slices = new List<GameObject>();
+    private GameObject generationButton;
 
     public Material finalLinkMaterial;
     public float finalLinkWidth;
@@ -29,6 +37,31 @@ public class Model : MonoBehaviour
         public Node node1;
         public Node node2;
         public LineRenderer lineRenderer;
+    }
+
+    public void onServerStart()
+    {
+        sendReceive.sendBoundaryRequestClient();
+        string path = Application.dataPath + $"/Resources/boundary.json";
+        if (!string.IsNullOrEmpty(path))
+        {
+            string jsonString = File.ReadAllText(path);
+            //Debug.Log("json " + jsonString);
+
+            var jsonarray = JsonConvert.DeserializeObject<List<List<float>>>(jsonString);
+
+            outlinePoints = new List<Vector3>();
+            origin = new Vector3(0f, 0f, 0f);
+
+            foreach (var point in jsonarray)
+            {
+                outlinePoints.Add(new Vector3(point[0] / 20f, point[1] / 20f, point[2] / 20f));
+            }
+
+            
+
+            createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
+        }
     }
 
     // Start is called before the first frame update
@@ -46,22 +79,8 @@ public class Model : MonoBehaviour
         GameObject.FindGameObjectsWithTag("UserInterface")[0].gameObject.SetActive(false);
 
         outline = GameObject.FindGameObjectsWithTag("Outline")[0];
-
-        // TODO: change with API call to initialize boundary
-        origin = new Vector3(0f, 0f, 0f);
-        outlinePoints = new List<Vector3>()
-        {
-            new Vector3(0f, 0f, 0f),
-            new Vector3(9.2f/20.0f, 0f, 0f),
-            new Vector3(9.2f/20.0f, 0f, 6f/20.0f),
-            new Vector3(14f/20.0f, 0f, 6f/20.0f),
-            new Vector3(14f/20.0f, 0f, 18f/20.0f),
-            new Vector3(0f, 0f, 18f/20.0f),
-            new Vector3(0f, 0f, 0f),
-        };
-        createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
-
     }
+    
 
     public void onConfirmOutline()
     {
@@ -83,12 +102,17 @@ public class Model : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Create links from the list
-        foreach (var link in listOfLinks)
+        //check if we have outline otherwise wait for server 
+        if (!outlinePoints.IsNull() && outlinePoints.Count != 0)
         {
-            link.lineRenderer.SetPosition(0, link.node1.getSphereBaseCoordinates()); //x,y and z position of the starting point of the line
-            link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
+            // Create links from the list
+            foreach (var link in listOfLinks)
+            {
+                link.lineRenderer.SetPosition(0, link.node1.getSphereBaseCoordinates()); //x,y and z position of the starting point of the line
+                link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
+            }
         }
+        
     }
 
     private void createOutlineFromPoints(List<Vector3> points)
@@ -196,34 +220,42 @@ public class Model : MonoBehaviour
         string json = JsonUtility.ToJson(graph);
         return json;
     }
-
-    // Send Mesh request to API
-    public void generateFloorPlan()
+    
+    //called by the UI in HandButtonController
+    public void startMeshGeneration(GameObject button)
     {
-        GameObject button = GameObject.FindGameObjectsWithTag("GenerateButton")[0];
-        StartCoroutine(Wait(1f, button)); // Asynchronous request
+        generationButton = button;
+        generationButton.GetComponent<ButtonLoader>().startLoading();
+
+        string jsonString = exportGraphToJson();
+        //write jSon on disk
+        GameSettingsSingleton.Instance.graphJsonString = jsonString;
+        string path = Application.dataPath + "/Resources/graph.json";
+        File.WriteAllText(path, GameSettingsSingleton.Instance.graphJsonString);
+
+        Debug.Log("Client sends the graph to server");
+        sendReceive.sendGraphClient();
     }
 
-    public IEnumerator Wait(float delayInSecs, GameObject button)
+    public void finishMeshGeneration()
     {
-        yield return new WaitForSeconds(0.1f); // To keep the button clicking sound
-        button.GetComponent<ButtonLoader>().startLoading();
-        yield return new WaitForSeconds(delayInSecs);  // TODO: implement the request, remove waiting
-
-        Debug.Log(exportGraphToJson());
-        button.GetComponent<ButtonLoader>().stopLoading();
-
-        // Do the action, TODO: move elsewhere
         createMeshObjects();
+        generationButton.GetComponent<ButtonLoader>().stopLoading();
     }
 
     public void createMeshObjects()
     {
-        // TODO: change to adapt to API
-        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice01")));
-        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice02")));
-        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice03")));
-        slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice04")));
+        //TODO use slices instead of mesh
+        //Debug.Log(GameObject.FindGameObjectsWithTag("LoadedMesh").Length);
+        //Debug.Log(slices.Count);
+        slices.Add(GameObject.FindGameObjectsWithTag("LoadedMesh")[0]);
+        slices.Add(new GameObject());
+        slices.Add(new GameObject());
+        slices.Add(new GameObject());
+        //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice01")));
+        //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice02")));
+        //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice03")));
+        //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice04")));
 
         foreach (var slice in slices) {
             slice.transform.position = transformedOrigin;

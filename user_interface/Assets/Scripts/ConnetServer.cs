@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ConnetServer : MonoBehaviourPunCallbacks
 {
+    public Model model;
     
     void Start()
     {
@@ -19,11 +20,13 @@ public class ConnetServer : MonoBehaviourPunCallbacks
         Debug.Log("server connected");
         PhotonNetwork.JoinLobby();
         StartCoroutine(CreateJoinRoom(0.1f));
+        //model.GetComponent<Model>().onServerStart();
     }
 
     public override void OnJoinedRoom()
     {
         _SetCameraOwnership();
+        model.onServerStart();
     }
 
     private void _SetCameraOwnership()
