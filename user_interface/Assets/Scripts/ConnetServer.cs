@@ -26,6 +26,7 @@ public class ConnetServer : MonoBehaviourPunCallbacks
     {
         //_SetCameraOwnership();
         model.onServerStart();
+        //model.onBoundaryReceive();
     }
 
     private void _SetCameraOwnership()

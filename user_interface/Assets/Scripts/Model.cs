@@ -31,6 +31,14 @@ public class Model : MonoBehaviour
     private List<GameObject> slices = new List<GameObject>();
     private GameObject generationButton;
 
+    // All furniture UI
+    private GameObject allFurnitures;
+    private bool hideAllFurnitures = false;
+    private GameObject outlineLoader;
+
+    // Hand menu
+    private GameObject outlineHandMenu;
+
     public Material finalLinkMaterial;
     public float finalLinkWidth;
     public Vector3 initialOutlinePosition;
@@ -66,7 +74,9 @@ public class Model : MonoBehaviour
             }
 
             createOutlineFromPoints(outlinePoints); // initialize content for the outline gameObject
+            outlineLoader.SetActive(false);
             outline.SetActive(true);
+            outlineHandMenu.SetActive(true);
         }
     }
 
@@ -80,6 +90,13 @@ public class Model : MonoBehaviour
             listOfNodes.Add(node);
             gameObject.SetActive(false); // Furniture UI is not visible until it is tracked a first time
         }
+
+        // Initialize references to objects used later
+        allFurnitures = GameObject.FindGameObjectsWithTag("AllFurnitures")[0];
+        GameObject outlineParent = GameObject.FindGameObjectsWithTag("Outline")[0].transform.parent.gameObject;
+        outlineHandMenu =outlineParent.transform.Find("HandMenu").gameObject;
+        outlineHandMenu.SetActive(false); // Hide menu until the outline is received
+        outlineLoader = outlineParent.transform.Find("Loader").gameObject;
 
         // Hide UserInterface
         GameObject.FindGameObjectsWithTag("UserInterface")[0].gameObject.SetActive(false);
@@ -330,5 +347,11 @@ public class Model : MonoBehaviour
                 slices[slices.Count - 1 - i].SetActive(false);
             }
         }
+    }
+
+    public void hideAllFurnitureUI()
+    {
+        allFurnitures.SetActive(hideAllFurnitures);
+        hideAllFurnitures = !hideAllFurnitures;
     }
 }

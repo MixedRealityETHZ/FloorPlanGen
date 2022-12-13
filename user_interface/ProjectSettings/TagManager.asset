@@ -11,6 +11,7 @@ TagManager:
   - Outline
   - UserInterface
   - LoadedMesh
+  - AllFurnitures
   layers:
   - Default
   - TransparentFX
