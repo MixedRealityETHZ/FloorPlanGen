@@ -88,7 +88,8 @@ public class Model : MonoBehaviour
 
     public void onConfirmOutline()
     {
-        outlineRotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
+        // TODO: is it accurate to use the outline for this, and not the handle that is on the origin?
+        outlineRotation = outline.transform.rotation;
         outlineRotationInv = Quaternion.Inverse(outlineRotation);
         transformedOrigin = outline.transform.position;
         transformedOutlinePoints = new List<Vector3>(new Vector3[outlinePoints.Count]);
