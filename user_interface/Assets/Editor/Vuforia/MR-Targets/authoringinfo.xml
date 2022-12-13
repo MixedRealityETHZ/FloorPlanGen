@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v5.7.2">
+        <ModelTarget name="dinningTable" targetId="765138314ab84834ade5b68a1ced10c2" bbox="-0.072974 -0.000136 -0.054063 0.051794 0.056779 0.039040" version="13.0" toolVersion="v5.7.2" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="doubleBed" targetId="3bdb284edfb940c098db406ab8f91ab4" bbox="-0.040462 -0.000037 -0.047017 0.054504 0.053149 0.056531" version="13.0" toolVersion="v5.7.2" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="singleBedA" targetId="28b5569e8cf34aa98abc420abd0e15db" bbox="-0.026646 -0.000025 -0.046223 0.049898 0.047416 0.054336" version="13.0" toolVersion="v5.7.2" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="singleBedB" targetId="a8546a0786394f54976bd20e5415401b" bbox="-0.049246 -0.000025 -0.059520 0.027299 0.061393 0.041039" version="13.0" toolVersion="v5.7.2" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="sofa" targetId="c4c2b590016b481588db12661c78fd41" bbox="-0.064796 -0.000047 -0.025952 0.047942 0.033926 0.011835" version="13.0" toolVersion="v5.7.2" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="camera" targetId="c570b4a42fae4d7bb2e31a6d32132f6b" bbox="-0.024416 -0.000023 -0.028697 0.027379 0.050594 0.025515" version="13.0" toolVersion="v5.7.2" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="dinningTable" assemblyId="42f69595bd9e4f29ae4ab3fb58ef0857">
+        <Part name="dinningTable" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="doubleBed" assemblyId="23aa07c9eaab4225ad0bd975491f0017">
+        <Part name="doubleBed" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="singleBedA" assemblyId="f85d7a94f7af40a88ad7e822f46c5a5a">
+        <Part name="singleBedA" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="singleBedB" assemblyId="5174db834cef422f89f2d392e0d20cf4">
+        <Part name="singleBedB" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="sofa" assemblyId="8526a0be4a374b58829f3ffbd8527c7d">
+        <Part name="sofa" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="camera" assemblyId="7c3d8aa8c2054e45ad4a974c8831b310">
+        <Part name="camera" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <ModelTargetDatabase mtDBid="d9ace5c8e8784e8288d7c6694dd68edb" name="MR-Targets" toolVersion="v5.7.2" version="36.0" />
+</QCARInfo>

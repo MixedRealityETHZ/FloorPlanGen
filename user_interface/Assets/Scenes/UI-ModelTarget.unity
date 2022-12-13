@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6790198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 1520206671}
@@ -500,7 +500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61361341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 1489141443}
@@ -797,7 +797,7 @@ PrefabInstance:
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
@@ -1251,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.025, y: 0.01}
+  m_AnchoredPosition: {x: 0.025, y: 0.03}
   m_SizeDelta: {x: 0.15, y: 0.03}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &204061083
@@ -1434,7 +1434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.077, y: 0.01}
+  m_AnchoredPosition: {x: 0.077, y: 0.03}
   m_SizeDelta: {x: 0.1, y: 0.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &213524999
@@ -1582,6 +1582,157 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &223493342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223493343}
+  - component: {fileID: 223493347}
+  - component: {fileID: 223493346}
+  - component: {fileID: 223493344}
+  - component: {fileID: 223493345}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223493343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223493342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 358634569}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &223493344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223493342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4619c999be905de4bb097a260f3ab926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+--- !u!114 &223493345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223493342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1621554113, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mObserverBehaviour: {fileID: 223493347}
+  mHiddenRoot: {fileID: 0}
+  mTargetName: camera
+  mDatasetName: Vuforia/MR-Targets.xml
+  mCastedBehaviour: {fileID: 223493347}
+  mModelScale: {x: 0.051795, y: 0.050617, z: 0.054211996}
+  mModelTargetPreview: {fileID: 0}
+--- !u!114 &223493346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223493342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatusFilter: 1
+  UsePoseSmoothing: 0
+  AnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 3.3333333
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 1
+      inSlope: 3.3333333
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  OnTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &223493347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223493342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -75151077, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PreviewVisible: 1
+  RuntimeOcclusion: 0
+  mTrackableName: camera
+  mInitializedInEditor: 1
+  mDataSetPath: Vuforia/MR-Targets.xml
+  mBaseSize: 0.051795
+  mAspectRatioXY: 0.9772565
+  mAspectRatioXZ: 1.0466647
+  mShowBoundingBox: 0
+  mOverrideSnappingPose: 0
+  mBBoxMin: {x: -0.024416, y: -0.000023, z: -0.028697}
+  mBBoxMax: {x: 0.027379, y: 0.050594, z: 0.025515}
+  mPreviewImage: {fileID: 0}
+  mLength: 0.051795
+  mWidth: 0.050617
+  mHeight: 0.054211996
+  m3DGuideViewModel: {fileID: 0}
+  m2DGuideViewImage: {fileID: 0}
+  mGuideViewDisplayMode: 0
+  m2DGuideViewMaterial: {fileID: 0}
+  m3DGuideViewMaterial: {fileID: 0}
+  mSelectedGuideView: 
+  mMotionHint: 1
+  mTrackingMode: 1
+  mTrackingOptimization: 0
+  mTrackingOptimizationNeedsUpgrade: 0
+  mHasRealisticTextures: 0
+  mPreview: {fileID: 223493345}
+  mAutoValidationDataSetName: 
 --- !u!1 &247065780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,7 +1758,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247065780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 1324314732}
@@ -2138,7 +2289,7 @@ PrefabInstance:
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
@@ -2469,7 +2620,7 @@ MonoBehaviour:
   mObserverBehaviour: {fileID: 357612828}
   mHiddenRoot: {fileID: 0}
   mTargetName: singleBedA
-  mDatasetName: Vuforia/MR-Furniture.xml
+  mDatasetName: Vuforia/MR-Targets.xml
   mCastedBehaviour: {fileID: 357612828}
   mModelScale: {x: 0.076544, y: 0.047441002, z: 0.100559}
   mModelTargetPreview: {fileID: 0}
@@ -2533,7 +2684,7 @@ MonoBehaviour:
   RuntimeOcclusion: 0
   mTrackableName: singleBedA
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/MR-Furniture.xml
+  mDataSetPath: Vuforia/MR-Targets.xml
   mBaseSize: 0.076544
   mAspectRatioXY: 0.61978734
   mAspectRatioXZ: 1.3137411
@@ -2591,7 +2742,7 @@ Transform:
   - {fileID: 357612824}
   - {fileID: 2024202860}
   - {fileID: 2011603574}
-  - {fileID: 2007759937}
+  - {fileID: 223493343}
   m_Father: {fileID: 287677548}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2639,7 +2790,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363523362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 364361276}
@@ -3390,7 +3541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570606134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 1195440563}
@@ -3944,7 +4095,7 @@ MonoBehaviour:
   mObserverBehaviour: {fileID: 689129304}
   mHiddenRoot: {fileID: 0}
   mTargetName: doubleBed
-  mDatasetName: Vuforia/MR-Furniture.xml
+  mDatasetName: Vuforia/MR-Targets.xml
   mCastedBehaviour: {fileID: 689129304}
   mModelScale: {x: 0.094965994, y: 0.053186, z: 0.103548005}
   mModelTargetPreview: {fileID: 0}
@@ -4008,7 +4159,7 @@ MonoBehaviour:
   RuntimeOcclusion: 0
   mTrackableName: doubleBed
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/MR-Furniture.xml
+  mDataSetPath: Vuforia/MR-Targets.xml
   mBaseSize: 0.094965994
   mAspectRatioXY: 0.5600531
   mAspectRatioXZ: 1.0903693
@@ -4303,6 +4454,36 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2204069621878992594, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
+--- !u!1 &782685861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 782685862}
+  m_Layer: 0
+  m_Name: CameraPuppet
+  m_TagString: CameraPuppet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &782685862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782685861}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &794007793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 586303850521236049, guid: 9215a7c858170d74fb2257375d5feaf1,
@@ -4708,7 +4889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.025, y: 0.01}
+  m_AnchoredPosition: {x: 0.025, y: 0.03}
   m_SizeDelta: {x: 0.15, y: 0.03}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &978444262
@@ -5131,7 +5312,7 @@ PrefabInstance:
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
@@ -5216,7 +5397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031946549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 1086727297}
@@ -5348,7 +5529,7 @@ MonoBehaviour:
   mObserverBehaviour: {fileID: 1039991939}
   mHiddenRoot: {fileID: 0}
   mTargetName: dinningTable
-  mDatasetName: Vuforia/MR-Furniture.xml
+  mDatasetName: Vuforia/MR-Targets.xml
   mCastedBehaviour: {fileID: 1039991939}
   mModelScale: {x: 0.124768, y: 0.056915, z: 0.093103}
   mModelTargetPreview: {fileID: 0}
@@ -5412,7 +5593,7 @@ MonoBehaviour:
   RuntimeOcclusion: 0
   mTrackableName: dinningTable
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/MR-Furniture.xml
+  mDataSetPath: Vuforia/MR-Targets.xml
   mBaseSize: 0.124768
   mAspectRatioXY: 0.45616665
   mAspectRatioXZ: 0.74620897
@@ -6366,7 +6547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.025, y: 0.01}
+  m_AnchoredPosition: {x: 0.025, y: 0.03}
   m_SizeDelta: {x: 0.15, y: 0.03}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1238090605
@@ -6549,7 +6730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.077, y: 0.01}
+  m_AnchoredPosition: {x: 0.077, y: 0.03}
   m_SizeDelta: {x: 0.1, y: 0.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1258204930
@@ -7191,7 +7372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378862285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 1916562325}
@@ -7304,7 +7485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.077, y: 0.01}
+  m_AnchoredPosition: {x: 0.077, y: 0.03}
   m_SizeDelta: {x: 0.1, y: 0.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1382962953
@@ -7487,7 +7668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.077, y: 0.01}
+  m_AnchoredPosition: {x: 0.077, y: 0.03}
   m_SizeDelta: {x: 0.1, y: 0.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1394585057
@@ -7845,7 +8026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429124865}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 1493946645}
@@ -8214,7 +8395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450640303}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 2014735582}
@@ -9285,7 +9466,7 @@ PrefabInstance:
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
@@ -9715,7 +9896,7 @@ PrefabInstance:
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
         type: 3}
@@ -9810,7 +9991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.077, y: 0.01}
+  m_AnchoredPosition: {x: 0.077, y: 0.03}
   m_SizeDelta: {x: 0.1, y: 0.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1698023964
@@ -11128,7 +11309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978808238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 1641723524}
@@ -11287,157 +11468,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979042474}
   m_Mesh: {fileID: 4300000, guid: 24d47aad909b7114f99ea8657d2883d8, type: 3}
---- !u!1 &2007759936
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2007759937}
-  - component: {fileID: 2007759941}
-  - component: {fileID: 2007759940}
-  - component: {fileID: 2007759939}
-  - component: {fileID: 2007759938}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2007759937
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007759936}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 358634569}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2007759938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007759936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4619c999be905de4bb097a260f3ab926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: -1
---- !u!114 &2007759939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007759936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1621554113, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mObserverBehaviour: {fileID: 2007759941}
-  mHiddenRoot: {fileID: 0}
-  mTargetName: camera
-  mDatasetName: Vuforia/camera.xml
-  mCastedBehaviour: {fileID: 2007759941}
-  mModelScale: {x: 0.051795, y: 0.050617, z: 0.054211996}
-  mModelTargetPreview: {fileID: 0}
---- !u!114 &2007759940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007759936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886328de6a5c14cbb85854fdf1a5085b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 1
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2007759941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007759936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -75151077, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PreviewVisible: 1
-  RuntimeOcclusion: 0
-  mTrackableName: camera
-  mInitializedInEditor: 1
-  mDataSetPath: Vuforia/camera.xml
-  mBaseSize: 0.051795
-  mAspectRatioXY: 0.9772565
-  mAspectRatioXZ: 1.0466647
-  mShowBoundingBox: 0
-  mOverrideSnappingPose: 0
-  mBBoxMin: {x: -0.024416, y: -0.000023, z: -0.028697}
-  mBBoxMax: {x: 0.027379, y: 0.050594, z: 0.025515}
-  mPreviewImage: {fileID: 0}
-  mLength: 0.051795
-  mWidth: 0.050617
-  mHeight: 0.054211996
-  m3DGuideViewModel: {fileID: 0}
-  m2DGuideViewImage: {fileID: 0}
-  mGuideViewDisplayMode: 0
-  m2DGuideViewMaterial: {fileID: 0}
-  m3DGuideViewMaterial: {fileID: 0}
-  mSelectedGuideView: 
-  mMotionHint: 1
-  mTrackingMode: 1
-  mTrackingOptimization: 0
-  mTrackingOptimizationNeedsUpgrade: 0
-  mHasRealisticTextures: 0
-  mPreview: {fileID: 2007759939}
-  mAutoValidationDataSetName: 
 --- !u!1 &2011603573
 GameObject:
   m_ObjectHideFlags: 0
@@ -11500,7 +11530,7 @@ MonoBehaviour:
   mObserverBehaviour: {fileID: 2011603578}
   mHiddenRoot: {fileID: 0}
   mTargetName: sofa
-  mDatasetName: Vuforia/MR-Furniture.xml
+  mDatasetName: Vuforia/MR-Targets.xml
   mCastedBehaviour: {fileID: 2011603578}
   mModelScale: {x: 0.112738, y: 0.033972997, z: 0.037786998}
   mModelTargetPreview: {fileID: 0}
@@ -11564,7 +11594,7 @@ MonoBehaviour:
   RuntimeOcclusion: 0
   mTrackableName: sofa
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/MR-Furniture.xml
+  mDataSetPath: Vuforia/MR-Targets.xml
   mBaseSize: 0.112738
   mAspectRatioXY: 0.3013447
   mAspectRatioXZ: 0.33517534
@@ -11767,7 +11797,7 @@ MonoBehaviour:
   mObserverBehaviour: {fileID: 2024202863}
   mHiddenRoot: {fileID: 0}
   mTargetName: singleBedB
-  mDatasetName: Vuforia/MR-Furniture.xml
+  mDatasetName: Vuforia/MR-Targets.xml
   mCastedBehaviour: {fileID: 2024202863}
   mModelScale: {x: 0.076545, y: 0.061418, z: 0.100558996}
   mModelTargetPreview: {fileID: 0}
@@ -11831,7 +11861,7 @@ MonoBehaviour:
   RuntimeOcclusion: 0
   mTrackableName: singleBedB
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/MR-Furniture.xml
+  mDataSetPath: Vuforia/MR-Targets.xml
   mBaseSize: 0.076545
   mAspectRatioXY: 0.8023777
   mAspectRatioXZ: 1.3137239
@@ -11904,7 +11934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.025, y: 0.01}
+  m_AnchoredPosition: {x: 0.025, y: 0.03}
   m_SizeDelta: {x: 0.15, y: 0.03}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2043676393
@@ -12087,7 +12117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.025, y: 0.01}
+  m_AnchoredPosition: {x: 0.025, y: 0.03}
   m_SizeDelta: {x: 0.15, y: 0.03}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2070306203
@@ -12526,7 +12556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245239769778640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: -0.075}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.075}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 6440870717316449800}

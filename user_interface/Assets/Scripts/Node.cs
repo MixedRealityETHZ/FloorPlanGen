@@ -164,7 +164,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public Vector3 getSphereBaseCoordinates()
     {
-        return referencePosition;
+        return trackingIndicator.transform.position;
     }
 
     public string getObjectDisplayName()
@@ -175,8 +175,8 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     public void updateTrackingStatus(bool trackingStatus)
     {
         this.trackingStatus = trackingStatus;
-
-        gameObject.SetActive(true);
+        
+        if (trackingStatus) gameObject.SetActive(true);
         trackingIndicator.GetComponent<CustomProgressIndicatorObjectDisplay>().rotationActive = trackingStatus;
     }
 

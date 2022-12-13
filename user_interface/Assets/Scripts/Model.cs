@@ -15,6 +15,8 @@ public class Model : MonoBehaviour
     private Vector3 origin; //Point given by API as bottom left corner of the outline TODO: change to use the actual origin of outline sent by the API
     private List<Vector3> transformedOutlinePoints;
     private Vector3 transformedOrigin;
+    private Quaternion outileRotation;
+    private Quaternion outileRotationInv;
 
     // Mesh Slices
     public int layerNumber; // Default layer number
@@ -65,14 +67,28 @@ public class Model : MonoBehaviour
 
     }
 
+    public Vector3 getTransformedOrigin()
+    {
+        return transformedOrigin;
+    }
+    public Quaternion getOutileRotation()
+    {
+        return outileRotation;
+    }
+    public Quaternion getOutileRotationInv()
+    {
+        return outileRotationInv;
+    }
+
     public void onConfirmOutline()
     {
-        Quaternion rotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
+        outileRotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
+        outileRotationInv = Quaternion.Inverse(outileRotation);
         transformedOrigin = outline.transform.position; //ToDo: take ball position??
         transformedOutlinePoints = new List<Vector3>(new Vector3[outlinePoints.Count]);
         for (int i = 0; i < outlinePoints.Count; i += 1)
         {
-            transformedOutlinePoints[i] = rotation * (outlinePoints[i] - origin) + transformedOrigin;
+            transformedOutlinePoints[i] = outileRotation * (outlinePoints[i] - origin) + transformedOrigin;
         }
         originYAngle = outline.transform.localEulerAngles.y;
 

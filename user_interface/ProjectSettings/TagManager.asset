@@ -11,6 +11,7 @@ TagManager:
   - Outline
   - UserInterface
   - CameraUI
+  - CameraPuppet
   layers:
   - Default
   - TransparentFX
