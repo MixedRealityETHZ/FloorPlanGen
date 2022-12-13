@@ -183,6 +183,11 @@ public class Model : MonoBehaviour
         return transformedOutlinePoints;
     }
 
+    public Vector3 getTransformedOrigin()
+    {
+        return transformedOrigin;
+    }
+
     // Export graph to JSON
 
     [System.Serializable]
@@ -269,7 +274,7 @@ public class Model : MonoBehaviour
         foreach (var slice in slices) {
             slice.transform.position = transformedOrigin;
             slice.transform.eulerAngles = new Vector3(0.00f, 180f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
-            slice.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            slice.transform.localScale = new Vector3(-0.05f, 0.05f, 0.05f);
             slice.SetActive(false);
         }
         Debug.Log("mesh pos " + loadedObj.transform.position);

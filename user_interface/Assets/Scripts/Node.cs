@@ -140,7 +140,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     public NodeExport getNode()
     {
         // Position
-        location[0] = referencePosition[0]; // TODO: change to get location relative to boundary curve plane
+        location[0] = referencePosition[0];
         location[1] = referencePosition[2];
 
         // Rotation
