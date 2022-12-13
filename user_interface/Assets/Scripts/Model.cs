@@ -45,6 +45,10 @@ public class Model : MonoBehaviour
     public void onServerStart()
     {
         sendReceive.sendBoundaryRequestClient();
+    }
+
+    public void onBoundaryReceive()
+    {
         string path = Application.dataPath + $"/Resources/boundary.json";
         if (!string.IsNullOrEmpty(path))
         {

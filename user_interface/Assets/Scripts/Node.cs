@@ -146,7 +146,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
         NodeExport node = new NodeExport();
         node.id = id;
         node.name = objectName;
-        node.position = new Vector3Json(relativePosition.x, relativePosition.z, relativePosition.y);
+        node.position = new Vector3Json(relativePosition.x*20f, relativePosition.z*20f, relativePosition.y*20f); // *20 to scale to original size
         node.angle = model.getTrackingHub().getNodeRelativeRotation(id);
         node.area = size;
 

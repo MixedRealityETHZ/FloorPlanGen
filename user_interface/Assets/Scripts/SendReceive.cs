@@ -11,6 +11,7 @@ using System;
 public class SendReceive : MonoBehaviourPun
 {
     private PhotonView _photonView;
+    public Model model;
 
     private void OnEnable()
     {
@@ -69,6 +70,7 @@ public class SendReceive : MonoBehaviourPun
             //write boundary
             string path = Application.dataPath + "/Resources/boundary.json";
             File.WriteAllText(path, GameSettingsSingleton.Instance.boundaryJsonString);
+            model.onBoundaryReceive();
         }
     }
     private void _SendGraph2Server()
