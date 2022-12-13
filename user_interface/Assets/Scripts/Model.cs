@@ -6,6 +6,8 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using Microsoft.MixedReality.Toolkit;
+using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class Model : MonoBehaviour
 {
@@ -133,7 +135,18 @@ public class Model : MonoBehaviour
                 link.lineRenderer.SetPosition(1, link.node2.getSphereBaseCoordinates()); //x,y and z position of the end point of the line
             }
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resetEverything();
+        }
+
+    }
+
+    public void resetEverything() // Will set the scene back to its equivalent state. Same result as closing and restarting the app.
+    {
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene("UI-ModelTarget");
     }
 
     private void createOutlineFromPoints(List<Vector3> points)
