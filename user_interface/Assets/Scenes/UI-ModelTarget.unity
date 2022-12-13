@@ -5239,7 +5239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  objectName: doubleBed
+  objectName: bigbed
   displayName: Double Bed
 --- !u!1 &1015532144
 GameObject:
@@ -6153,7 +6153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
-  objectName: simpleBedA
+  objectName: bed1
   displayName: Simple Bed A
 --- !u!1 &1155637807
 GameObject:
@@ -7993,7 +7993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
-  objectName: singleBedB
+  objectName: bed2
   displayName: Single Bed B
 --- !u!1 &1429124865
 GameObject:

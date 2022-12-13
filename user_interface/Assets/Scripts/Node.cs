@@ -4,6 +4,7 @@ using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using System.Runtime.CompilerServices;
 using System;
+using UnityEngine.PlayerLoop;
 
 public class Node : MonoBehaviour // attached to FurnitureUI
 {
@@ -14,8 +15,8 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     private Model model;
     private bool trackingStatus;
 
-    private Vector2 location;
-    private float rotation;
+    // private Vector2 location;
+    // private float rotation;
     private float size;
 
     private float maxSize = 40;
@@ -141,18 +142,13 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     {
         // Position
         Vector3 relativePosition = model.getTrackingHub().getNodeRelativePosition(id);
-        location[0] = relativePosition[0];
-        location[1] = relativePosition[2];
-
-        // Rotation
-        rotation = model.getTrackingHub().getNodeRelativeRotation(id);
 
         NodeExport node = new NodeExport();
-        node.ID = id;
-        node.objectname = objectName;
-        node.location = location;
-        node.rotation = rotation;
-        node.size = size;
+        node.id = id;
+        node.name = objectName;
+        node.position = new Vector3Json(relativePosition.x, relativePosition.z, relativePosition.y);
+        node.angle = model.getTrackingHub().getNodeRelativeRotation(id);
+        node.area = size;
 
         string json = JsonUtility.ToJson(node);
         return node;
@@ -209,11 +205,24 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 [System.Serializable]
 public struct NodeExport
 {
-    public int ID;
-    public string objectname;
-    public Vector2 location;
-    public float rotation;
-    public float size;
+    public int id;
+    public string name;
+    public Vector3Json position;
+    public float angle;
+    public float area;
+}
+
+[System.Serializable]
+public struct Vector3Json
+{
+    public float x;
+    public float y;
+    public float z;
+
+    public Vector3Json(float x, float y, float z)
+    {
+        this.x = x; this.y = y; this.z = z;
+    }
 }
 
 public static class MathUtility

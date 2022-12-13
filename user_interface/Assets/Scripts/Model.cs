@@ -15,6 +15,7 @@ public class Model : MonoBehaviour
     private List<Link> listOfLinks = new List<Link>();
 
     // Origin of the outline (to get positions of objects with respect to this origin)
+    private List<List<float>> jsonArray;
     private TrackingHub trackingHub;
     private float originYAngle = 0f;
     private GameObject outline;
@@ -50,12 +51,12 @@ public class Model : MonoBehaviour
             string jsonString = File.ReadAllText(path);
             //Debug.Log("json " + jsonString);
 
-            var jsonarray = JsonConvert.DeserializeObject<List<List<float>>>(jsonString);
+            jsonArray = JsonConvert.DeserializeObject<List<List<float>>>(jsonString);
 
             outlinePoints = new List<Vector3>();
             origin = new Vector3(0f, 0f, 0f);
 
-            foreach (var point in jsonarray)
+            foreach (var point in jsonArray)
             {
                 outlinePoints.Add(new Vector3(point[0] / 20f, point[2] / 20f, point[1] / 20f));
             }
@@ -211,39 +212,41 @@ public class Model : MonoBehaviour
     [System.Serializable]
     struct GraphExport
     {
-        public List<NodeExport> Nodes;
-        public List<EdgeExport> Edges;
-    }
-
-    [System.Serializable]
-    struct EdgeExport
-    {
-        public int nodeA;
-        public int nodeB;
+        public List<NodeExport> nodes;
+        public List<List<int>> edges;
+        public List<List<float>> boundary;
     }
 
     public string exportGraphToJson()
     {
         var graph = new GraphExport();
 
-        graph.Nodes = new List<NodeExport>();
+        Debug.Log(jsonArray);
+        graph.boundary = jsonArray;
+
+        graph.nodes = new List<NodeExport>();
         foreach (var node in listOfNodes)
         {
             if (node.inOutline())
-                graph.Nodes.Add(node.getNode());
+                graph.nodes.Add(node.getNode());
         }
 
-        graph.Edges = new List<EdgeExport>();
+        graph.edges = new List<List<int>>();
         foreach (var link in listOfLinks)
         {
-            var edge = new EdgeExport();
-            edge.nodeA = link.node1.id;
-            edge.nodeB = link.node2.id;
+            var edge = new List<int>();
+            edge.Add(link.node1.id);
+            edge.Add(link.node2.id);
             if (link.node1.inOutline() && link.node2.inOutline())
-                graph.Edges.Add(edge);
+                graph.edges.Add(edge);
         }
-            
-        string json = JsonUtility.ToJson(graph);
+
+        Debug.Log(graph.boundary);
+        Debug.Log(graph.edges);
+
+        // string json = JsonUtility.ToJson(graph);
+        string json = JsonConvert.SerializeObject(graph);
+        Debug.Log(json);
         return json;
     }
     
