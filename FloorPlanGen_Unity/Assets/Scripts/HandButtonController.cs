@@ -11,7 +11,6 @@ public class HandButtonController : MonoBehaviour
     public GameObject toggleButtonObject;
     public GameObject handButtonObjects;
     public TrackingHub trackingHub;
-    public SendReceive sendReceive;
     public Model model;
 
     private PressableButtonHoloLens2 toggleButton;

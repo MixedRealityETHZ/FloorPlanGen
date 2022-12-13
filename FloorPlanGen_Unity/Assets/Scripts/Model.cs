@@ -146,7 +146,7 @@ public class Model : MonoBehaviour
     public void resetEverything() // Will set the scene back to its equivalent state. Same result as closing and restarting the app.
     {
         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("UI-ModelTarget");
+        SceneManager.LoadScene("FloorPlanGen_Scene");
     }
 
     private void createOutlineFromPoints(List<Vector3> points)
