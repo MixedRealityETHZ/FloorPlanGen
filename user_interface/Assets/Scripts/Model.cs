@@ -17,12 +17,15 @@ public class Model : MonoBehaviour
     private List<Link> listOfLinks = new List<Link>();
 
     // Origin of the outline (to get positions of objects with respect to this origin)
+    private TrackingHub trackingHub;
     private float originYAngle = 0f;
     private GameObject outline;
     private List<Vector3> outlinePoints;
     private Vector3 origin; //Point given by API as bottom left corner of the outline TODO: change to use the actual origin of outline sent by the API
     private List<Vector3> transformedOutlinePoints;
     private Vector3 transformedOrigin;
+    private Quaternion outlineRotation;
+    private Quaternion outlineRotationInv;
 
     // Mesh Slices
     public int layerNumber; // Default layer number
@@ -85,19 +88,15 @@ public class Model : MonoBehaviour
 
     public void onConfirmOutline()
     {
-        Quaternion rotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
-        transformedOrigin = outline.transform.position; //TODO: take ball position??
+        outlineRotation = outline.gameObject.transform.GetChild(0).gameObject.transform.rotation;
+        outlineRotationInv = Quaternion.Inverse(outlineRotation);
+        transformedOrigin = outline.transform.position;
         transformedOutlinePoints = new List<Vector3>(new Vector3[outlinePoints.Count]);
         for (int i = 0; i < outlinePoints.Count; i += 1)
         {
-            transformedOutlinePoints[i] = rotation * (outlinePoints[i] - origin) + transformedOrigin;
+            transformedOutlinePoints[i] = outlineRotation * (outlinePoints[i] - origin) + transformedOrigin;
         }
         originYAngle = outline.transform.localEulerAngles.y;
-
-        //Debug
-        //outline.transform.position = new Vector3(0f, 0f, 0f); // moves outline to user field of vue
-        //outline.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-        //outline.GetComponent<LineRenderer>().SetPositions(transformedOutlinePoints.ToArray());
     }
 
     // Update is called once per frame
@@ -128,7 +127,7 @@ public class Model : MonoBehaviour
     {
         outline.transform.position = initialOutlinePosition; // moves outline to user field of vue
         outline.transform.eulerAngles = new Vector3(0f,0f,0f);
-        outline.transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0f); // Also move grabbing sphere
+        outline.transform.GetChild(0).transform.localPosition = new Vector3(0f, 0f, 0f); // Also move the handle
     }
 
     public void updateLayerNumber(SliderEventData eventData)
@@ -183,9 +182,29 @@ public class Model : MonoBehaviour
         return transformedOutlinePoints;
     }
 
+    public Quaternion getOutlineRotation()
+    {
+        return outlineRotation;
+    }
+
+    public Quaternion getOutlineRotationInv()
+    {
+        return outlineRotationInv;
+    }
+
     public Vector3 getTransformedOrigin()
     {
         return transformedOrigin;
+    }
+
+    public TrackingHub getTrackingHub()
+    {
+       return trackingHub;
+    }
+
+    public void setTrackingHub(TrackingHub trackingHub)
+    {
+        this.trackingHub = trackingHub;
     }
 
     // Export graph to JSON

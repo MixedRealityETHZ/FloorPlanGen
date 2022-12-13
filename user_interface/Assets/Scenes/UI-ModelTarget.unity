@@ -4865,7 +4865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b89a21819d99bc47a40b334e74f22fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlaceHandler: {fileID: 122548131}
+  objectToPlaceHandler: {fileID: 653361349}
   userInterface: {fileID: 287677545}
   handMenu: {fileID: 1520939488}
 --- !u!82 &849531740

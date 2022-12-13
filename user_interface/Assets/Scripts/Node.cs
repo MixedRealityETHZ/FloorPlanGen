@@ -140,11 +140,12 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     public NodeExport getNode()
     {
         // Position
-        location[0] = referencePosition[0];
-        location[1] = referencePosition[2];
+        Vector3 relativePosition = model.getTrackingHub().getNodeRelativePosition(id);
+        location[0] = relativePosition[0];
+        location[1] = relativePosition[2];
 
         // Rotation
-        rotation = referenceObj.transform.eulerAngles[1]; // TODO: change to get rotation relative to boundary curve plane
+        rotation = model.getTrackingHub().getNodeRelativeRotation(id);
 
         NodeExport node = new NodeExport();
         node.ID = id;
