@@ -6,8 +6,6 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using Microsoft.MixedReality.Toolkit;
-using Photon.Pun;
-using UnityEditor.Experimental.GraphView;
 
 public class Model : MonoBehaviour
 {
