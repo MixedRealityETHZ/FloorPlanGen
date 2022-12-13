@@ -7,6 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Microsoft.MixedReality.Toolkit;
 using Photon.Pun;
+using UnityEditor.Experimental.GraphView;
 
 public class Model : MonoBehaviour
 {
@@ -215,7 +216,8 @@ public class Model : MonoBehaviour
             var edge = new EdgeExport();
             edge.nodeA = link.node1.id;
             edge.nodeB = link.node2.id;
-            graph.Edges.Add(edge);
+            if (link.node1.inOutline() && link.node2.inOutline())
+                graph.Edges.Add(edge);
         }
             
         string json = JsonUtility.ToJson(graph);

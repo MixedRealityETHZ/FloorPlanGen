@@ -164,7 +164,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 
     public Vector3 getSphereBaseCoordinates()
     {
-        return referencePosition;
+        return trackingIndicator.transform.position;
     }
 
     public string getObjectDisplayName()
