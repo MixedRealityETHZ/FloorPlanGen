@@ -14,10 +14,10 @@ public class TrackingHub : MonoBehaviour
     private int trackedTargetID;
 
     //Camera
-/*    private GameObject cameraUI;
+    private GameObject cameraUI;
     private GameObject cameraTarget;
     private GameObject cameraPuppet;
-    private bool cameraPreviousTrackingStatus = false;*/
+    private bool cameraPreviousTrackingStatus = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +31,10 @@ public class TrackingHub : MonoBehaviour
         {
             UIs.Add(gameObject.GetComponent<Node>().id, gameObject);
         }
-/*        //Camera UI
-        cameraUI = GameObject.FindGameObjectsWithTag("CameraUI")[0];
+        //Camera UI
+        cameraUI = GameObject.Find("CameraUI");
         //Camera Puppet
-        cameraPuppet = GameObject.FindGameObjectsWithTag("CameraPuppet")[0];*/
+        cameraPuppet = GameObject.Find("VirtualCamera");
 
         foreach (Transform childT in transform)
         {
@@ -45,10 +45,10 @@ public class TrackingHub : MonoBehaviour
                 modelTargets.Add(childID, child);
                 previousTrackingStatus.Add(childID, false);
             }
-/*            else
+            else
             {
                 cameraTarget = child;
-            }*/
+            }
         }
 
         System.Diagnostics.Debug.Assert(UIs.Count == modelTargets.Count);
@@ -182,7 +182,7 @@ public class TrackingHub : MonoBehaviour
         modelTargetUpdateOrientation(modelTarget, UI);
     }
 
-/*    void cameraUpdate()
+    void cameraUpdate()
     {
         Vuforia.ModelTargetBehaviour modelTargetBehaviour = cameraTarget.GetComponent<ModelTargetBehaviour>();
         //Check tracking status
@@ -206,11 +206,11 @@ public class TrackingHub : MonoBehaviour
             originPosition.y = 0.0f;
             Quaternion trackedRotation = cameraTarget.transform.rotation;
 
-            cameraPuppet.transform.position = model.getOutileRotationInv() * (trackedPosition - originPosition);
-            cameraPuppet.transform.rotation = model.getOutileRotationInv() * trackedRotation;
+            cameraPuppet.transform.position = model.getOutlineRotationInv() * (trackedPosition - originPosition);
+            cameraPuppet.transform.rotation = model.getOutlineRotationInv() * trackedRotation;
         }
         modelTargetUpdateOrientation(cameraTarget, cameraUI);
-    }*/
+    }
 
     // Update is called once per frame
     void Update()
@@ -260,6 +260,6 @@ public class TrackingHub : MonoBehaviour
             }
         }
         //Camera tracking
-        //cameraUpdate();
+        cameraUpdate();
     }
 }

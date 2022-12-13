@@ -24,14 +24,15 @@ public class ConnetServer : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        //_SetCameraOwnership();
+        _SetCameraOwnership();
         model.onServerStart();
         model.onBoundaryReceive();
     }
 
     private void _SetCameraOwnership()
     {
-        CameraControl cameraControl = Camera.main.GetComponent<CameraControl>();
+        GameObject virtualCamera = GameObject.Find("VirtualCamera");
+        CameraControl cameraControl = virtualCamera.GetComponent<CameraControl>();
         cameraControl.SetOwnership2Client();
     }
 
