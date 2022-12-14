@@ -94,25 +94,21 @@ public class SendReceive : MonoBehaviourPun
             File.WriteAllText(path, GameSettingsSingleton.Instance.graphJsonString);
 
             //Send mesh to client when we have all information on graph
-            sendMeshServer();
+            StartCoroutine(WaitThenHandleMesh(3)); //TODO: wait for the mesh file to appear/to be modified
         }
 
     }
 
-    public void sendMeshServer()
+    IEnumerator WaitThenHandleMesh(int seconds)
     {
-        Debug.Log("Server spawning mesh");
-        _SpawnMesh();
-        // you can use the FileSystemWatcher to detect file changes
-        //TODO we will need to change it to account for the fact that the mesh is not yet generated or will be overwritten
-
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("Finish waiting for mesh");
         _SendMeshData2Client();
+        _SpawnMesh();
     }
 
     private void _SendMeshData2Client()
     {
-        //TODO generate mesh from rhino
-
         // split string into chunks
         string path = Application.dataPath + "/Resources/mesh.obj";
         string objString = File.ReadAllText(path);

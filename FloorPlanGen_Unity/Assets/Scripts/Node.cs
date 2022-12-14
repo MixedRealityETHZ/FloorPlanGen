@@ -205,19 +205,19 @@ public class Node : MonoBehaviour // attached to FurnitureUI
 [System.Serializable]
 public struct NodeExport
 {
-    public int id;
-    public string name;
+    public float area;
     public Vector3Json position;
     public float angle;
-    public float area;
+    public string name;
+    public int id;
 }
 
 [System.Serializable]
 public struct Vector3Json
 {
-    public float x;
-    public float y;
     public float z;
+    public float y;
+    public float x;
 
     public Vector3Json(float x, float y, float z)
     {

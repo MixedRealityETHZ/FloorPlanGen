@@ -26,7 +26,7 @@ public class ConnetServer : MonoBehaviourPunCallbacks
     {
         //_SetCameraOwnership();
         model.onServerStart();
-        model.onBoundaryReceive();
+        // model.onBoundaryReceive(); // TODO: remove in release, this is only for testing without the server
     }
 
     private void _SetCameraOwnership()
