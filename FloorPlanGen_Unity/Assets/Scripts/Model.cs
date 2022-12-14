@@ -246,9 +246,9 @@ public class Model : MonoBehaviour
     [System.Serializable]
     struct GraphExport
     {
-        public List<NodeExport> nodes;
         public List<List<int>> edges;
         public List<List<float>> boundary;
+        public List<NodeExport> nodes;
     }
 
     public string exportGraphToJson()
