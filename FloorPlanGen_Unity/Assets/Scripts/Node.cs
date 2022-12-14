@@ -173,7 +173,7 @@ public class Node : MonoBehaviour // attached to FurnitureUI
     {
         this.trackingStatus = trackingStatus;
 
-        gameObject.SetActive(true);
+        if (trackingStatus) gameObject.SetActive(true);
         trackingIndicator.GetComponent<CustomProgressIndicatorObjectDisplay>().rotationActive = trackingStatus;
     }
 

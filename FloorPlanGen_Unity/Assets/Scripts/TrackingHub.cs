@@ -33,8 +33,11 @@ public class TrackingHub : MonoBehaviour
         }
         //Camera UI
         cameraUI = GameObject.Find("CameraUI");
+        cameraUI.SetActive(false);
         //Camera Puppet
         cameraPuppet = GameObject.Find("VirtualCamera");
+        cameraPuppet.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        cameraPuppet.transform.rotation = Quaternion.identity;
 
         foreach (Transform childT in transform)
         {
@@ -199,14 +202,15 @@ public class TrackingHub : MonoBehaviour
         {
             modelTargetUpdatePosition(cameraTarget, cameraUI);
 
-            //Update puppet
             Vector3 trackedPosition = cameraTarget.transform.position;
             trackedPosition.y = 0.0f;
             Vector3 originPosition = model.getTransformedOrigin();
             originPosition.y = 0.0f;
             Quaternion trackedRotation = cameraTarget.transform.rotation;
 
-            cameraPuppet.transform.position = model.getOutlineRotationInv() * (trackedPosition - originPosition);
+            Vector3 puppetPosition = model.getOutlineRotationInv() * (trackedPosition - originPosition);
+            puppetPosition.y = 0.1f;
+            cameraPuppet.transform.position = puppetPosition;
             cameraPuppet.transform.rotation = model.getOutlineRotationInv() * trackedRotation;
         }
         modelTargetUpdateOrientation(cameraTarget, cameraUI);
@@ -233,6 +237,16 @@ public class TrackingHub : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             setTarget(1);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            UnityEngine.Debug.Log("[TrackingHub] Table Relative Pose: " + getNodeRelativePosition(0));
+
+            Vector3 trackedPosition = cameraTarget.transform.position;
+            trackedPosition.y = 0.0f;
+            Vector3 originPosition = model.getTransformedOrigin();
+            originPosition.y = 0.0f;
+            UnityEngine.Debug.Log("[TrackingHub] Camera Relative Pose: " + model.getOutlineRotationInv() * (trackedPosition - originPosition));
         }
 
         //Furnitures tracking

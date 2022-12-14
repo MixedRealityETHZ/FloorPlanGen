@@ -150,7 +150,7 @@ public class CameraUI : MonoBehaviour
     {
         this.trackingStatus = trackingStatus;
 
-        gameObject.SetActive(true);
+        if (trackingStatus) gameObject.SetActive(true);
         trackingIndicator.GetComponent<CustomProgressIndicatorObjectDisplay>().rotationActive = trackingStatus;
     }
 

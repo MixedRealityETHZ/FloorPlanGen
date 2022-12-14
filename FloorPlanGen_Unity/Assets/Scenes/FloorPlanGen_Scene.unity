@@ -2658,15 +2658,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308904395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 579045799}
-  - {fileID: 751294322}
   - {fileID: 1623083597836956027}
   - {fileID: 623440259}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &316781731
 GameObject:
@@ -2825,7 +2824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4619c999be905de4bb097a260f3ab926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 3
 --- !u!114 &357612826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4422,7 +4421,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 308904396}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &623440260
 MonoBehaviour:
@@ -4687,7 +4686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4619c999be905de4bb097a260f3ab926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 2
 --- !u!114 &689129302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4874,11 +4873,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751294321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.348, y: -0.1, z: -0.363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 308904396}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &751294323
 MonoBehaviour:
@@ -4907,7 +4906,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &751294325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4928,7 +4927,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 751294324}
-  sceneViewId: 3
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1001 &776599795
@@ -5936,7 +5935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385425a1ecb2b134fbabfb60f123d24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 2
   objectName: bigbed
   displayName: Double Bed
 --- !u!1 &1015532144
@@ -6953,7 +6952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385425a1ecb2b134fbabfb60f123d24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 3
   objectName: bed1
   displayName: Simple Bed A
 --- !u!1 &1155637807
@@ -7505,7 +7504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385425a1ecb2b134fbabfb60f123d24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 4
+  id: 1
   objectName: sofa
   displayName: Couch
 --- !u!1 &1238090603
@@ -8830,7 +8829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385425a1ecb2b134fbabfb60f123d24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 4
   objectName: bed2
   displayName: Single Bed B
 --- !u!1 &1429124865
@@ -12271,7 +12270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4619c999be905de4bb097a260f3ab926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 4
+  id: 1
 --- !u!114 &2011603576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12655,7 +12654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4619c999be905de4bb097a260f3ab926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 4
 --- !u!1 &2043676391
 GameObject:
   m_ObjectHideFlags: 0
@@ -13338,12 +13337,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640881905948465265}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: -0.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2883562494114107851}
   m_Father: {fileID: 308904396}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1640881905948465265
 GameObject:
