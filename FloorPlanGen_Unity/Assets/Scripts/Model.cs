@@ -198,7 +198,9 @@ public class Model : MonoBehaviour
             newLink.node2 = node2;
 
             // Create a new line
-            newLink.lineRenderer = new GameObject("Line_"+node1.objectName+"_"+node2.objectName).AddComponent<LineRenderer>();
+            GameObject line = new GameObject("Line_" + node1.objectName + "_" + node2.objectName);
+            line.transform.parent = node1.transform.parent.transform;
+            newLink.lineRenderer = line.AddComponent<LineRenderer>();
             newLink.lineRenderer.material = finalLinkMaterial;
             newLink.lineRenderer.startWidth = finalLinkWidth;
             newLink.lineRenderer.endWidth = finalLinkWidth;
@@ -317,31 +319,37 @@ public class Model : MonoBehaviour
     public void createMeshObjects(GameObject loadedObj)
     {
         //TODO use slices instead of mesh
-        slices.Add(loadedObj);
-        slices.Add(new GameObject());
-        slices.Add(new GameObject());
-        slices.Add(new GameObject());
+        slices.Add(GameObject.Instantiate(loadedObj));
+        slices.Add(GameObject.Instantiate(loadedObj));
+        slices.Add(GameObject.Instantiate(loadedObj));
+        slices.Add(GameObject.Instantiate(loadedObj));
+
         //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice01")));
         //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice02")));
         //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice03")));
         //slices.Add((GameObject)Instantiate(Resources.Load("01_house_slice04")));
 
+        float i = 0;
+
         foreach (var slice in slices) {
             slice.transform.position = transformedOrigin;
             slice.transform.eulerAngles = new Vector3(0.00f, 180f + originYAngle, 0.00f); // TODO: 180 seems weird to need to do that
-            slice.transform.localScale = new Vector3(-0.05f, 0.05f, 0.05f);
+            slice.transform.localScale = new Vector3(-0.05f, 0.05f/4f, 0.05f); // the /4 is to simulate slices from single mesh
             slice.SetActive(false);
+
+            slice.transform.position = slice.transform.position + new Vector3(0, i *0.035f, 0); // simulates slices from single mesh
+            i ++;
         }
         Debug.Log("mesh pos " + loadedObj.transform.position);
 
-        foreach (var obje in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+/*        foreach (var obje in FindObjectsOfType(typeof(GameObject)) as GameObject[])
         {
             if (obje.name == "mesh")
             {
                 Debug.Log(obje.name);
                 Debug.Log(obje.transform.position);
             }
-        }
+        }*/
         visualizeMeshFloorPlanLayer(layerNumber);
     }
 
