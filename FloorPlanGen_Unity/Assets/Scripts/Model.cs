@@ -319,7 +319,7 @@ public class Model : MonoBehaviour
     public void createMeshObjects(GameObject loadedObj)
     {
         //TODO use slices instead of mesh
-        slices.Add(GameObject.Instantiate(loadedObj));
+        slices.Add(loadedObj);
         slices.Add(GameObject.Instantiate(loadedObj));
         slices.Add(GameObject.Instantiate(loadedObj));
         slices.Add(GameObject.Instantiate(loadedObj));

@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/UI-ModelTarget.unity
-    guid: 6ef9f50a88ce25d44baa370df1d8577a
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: ccfcc1c19beeb3e40b6ffecd226da296,
       type: 2}

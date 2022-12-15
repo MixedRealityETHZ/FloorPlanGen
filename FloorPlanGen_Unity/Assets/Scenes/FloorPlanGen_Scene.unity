@@ -7058,7 +7058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169538241}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0.8}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1773055972}
@@ -11024,7 +11024,7 @@ MonoBehaviour:
   layerNumber: 2
   finalLinkMaterial: {fileID: 2100000, guid: 53ea63593b32415faf734536616f5fb3, type: 2}
   finalLinkWidth: 0.01
-  initialOutlinePosition: {x: 0, y: -0.5, z: 0.8}
+  initialOutlinePosition: {x: 0, y: -0.4, z: 0.8}
 --- !u!4 &1734836668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7307063430618434851, guid: 1093263a89abe47499cccf7dcb08effb,
