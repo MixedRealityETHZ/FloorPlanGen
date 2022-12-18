@@ -1,0 +1,8 @@
+conda create -n tf-cpu python=3.9
+conda activate tf-cpu
+conda install tensorflow==2.6.0
+pip install pandas
+pip3 install openpyxl
+
+#test
+python GNN-CVAE-GAN-VR.py
