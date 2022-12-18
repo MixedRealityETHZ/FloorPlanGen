@@ -1,13 +1,13 @@
-# FloorPlanGen
+# Floor Plan Generation from Tracked Physical Objects
 
+This repo contains all files needed to build the HoloLens app and the Windows server allowing to experiment with our mixed reality floor plan generation system.
+You would need to 3D-print the physical objects that are located [here](Models/1_20_furniture_for_tracking).
 
-## Steps to load the project on Unity:
-* Clone the repo, checkout on UI_2
-* Open the project on unity and ignore the compilation errors
-* Once the project open on unity, replace what is inside the Packages folder with the files found on this [Drive link](https://drive.google.com/drive/folders/19Cng-WUW0knYIzfJEhYQRKi1u7cIvbQt?usp=sharing)
-* Go back on unity and wait until have finished importing the packages
-* Follow unity advise to fix issues (close and reopen unity)
-* Run on playmode the scene UI-ModelTarget
-* Stop running it
-* The scene should no longer be black from the editor
-* Change build settings, to UWP, Hololens and ARM64
+## Set up the project
+To set up this project, please follow the instructions in the [README](FloorPlanGen_Unity/README.md) of the `FloorPlanGen_Unity` folder, and the [README](Server_Unity/README.md) of the `Server_Unity` folder.
+
+## Demo
+A complete demo of the experience is visible in [this video](videos/FloorPlanGen%20Final%20Demo%20Small.mp4).
+
+## Reports
+For more information about this project, reports are available [here](Reports).
