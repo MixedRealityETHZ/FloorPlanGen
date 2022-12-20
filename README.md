@@ -12,7 +12,7 @@ Here is a sneek peak of the experience:
 
 https://user-images.githubusercontent.com/67365803/208296431-dfab03ab-d58f-4c74-b18d-f3ed58452927.mp4
 
-The complete demo of the experience is visible in [this video](videos/FloorPlanGen%20Final%20Demo%20Small.mp4).
+The complete demo of the experience is visible in [this video](Videos/FloorPlanGen%20Final%20Demo%20Small.mp4).
 
 ## Reports
 For more information about this project, reports are available [here](Reports).
