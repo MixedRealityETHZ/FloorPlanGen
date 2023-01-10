@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v5.6.0-24-g3608ad5">
+        <ModelTarget name="dinningTable" targetId="0f347e2894f44a3eaaf33541b1a425a7" bbox="-0.072974 -0.000136 -0.054063 0.051794 0.056779 0.039040" version="13.0" toolVersion="v5.6.0-24-g3608ad5" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="doubleBed" targetId="9534d858b5104b849e04c2a97b4ac038" bbox="-0.040462 -0.000037 -0.047017 0.054504 0.053149 0.056531" version="13.0" toolVersion="v5.6.0-24-g3608ad5" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="singleBedA" targetId="c775415f748b467f8bc895c67752fb27" bbox="-0.026646 -0.000025 -0.046223 0.049898 0.047416 0.054336" version="13.0" toolVersion="v5.6.0-24-g3608ad5" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="singleBedB" targetId="008e98df7ae144ad8a11d3c37f225c34" bbox="-0.049246 -0.000025 -0.059520 0.027299 0.061393 0.041039" version="13.0" toolVersion="v5.6.0-24-g3608ad5" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+        <ModelTarget name="sofa" targetId="78aa933e0fee447991ee9447a87f43f6" bbox="-0.064796 -0.000047 -0.025952 0.047942 0.033926 0.011835" version="13.0" toolVersion="v5.6.0-24-g3608ad5" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="default" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="dinningTable" assemblyId="61e4a33fcf664113b722d786863c433f">
+        <Part name="dinningTable" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="doubleBed" assemblyId="da78872be9d44016943a4bd667e42d33">
+        <Part name="doubleBed" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="singleBedA" assemblyId="06e12383218c489abf0c8e2d9713cbd4">
+        <Part name="singleBedA" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="singleBedB" assemblyId="bb4de68a86844133becdde7e835c46b8">
+        <Part name="singleBedB" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <Assembly name="sofa" assemblyId="dfe3df28646145cb8f698062f5c32ec3">
+        <Part name="sofa" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+    <ModelTargetDatabase mtDBid="73e4285990dd486f835f6c7a57f67a57" name="MR-Furniture" toolVersion="v5.6.0-24-g3608ad5" version="36.0" />
+</QCARInfo>
