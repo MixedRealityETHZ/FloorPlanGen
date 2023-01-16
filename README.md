@@ -17,5 +17,5 @@ The complete demo of the experience is visible in [this video](Videos/FloorPlanG
 ## Reports
 For more information about this project, all reports are available [here](Reports).
 
-## Acknowledgment
+## Acknowledgments
 We would like to extend a special thank you to Anton Savov and Wenqian Yang for their supervision, guidance and support throughout this project. Their contributions, including the provision of 3D models, 3D printing, and assistance with setting up the API and server-side logic, were essential in the successful completion of this project. We are grateful for their contributions and support.
